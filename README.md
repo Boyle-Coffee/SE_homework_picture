@@ -25,7 +25,7 @@ Body： issue 的简要描述
 
 其他属性还包括 description 和 label，label 采用 GitHub 自带的类别，如下：
 
-![](E:\other\学习2\软件工程\团队项目\repository\SE_homework_picture\md_image\issue_label.jpg)
+![](md_image\issue_label.jpg)
 
 详细参考[ issue 规范](https://zhuanlan.zhihu.com/p/52370003)
 
