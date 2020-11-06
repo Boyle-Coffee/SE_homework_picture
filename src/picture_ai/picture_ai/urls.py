@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
 
-from picture_ai import views
+from . import views
 
 urlpatterns = [
     url(r'^$', views.hello_world),
