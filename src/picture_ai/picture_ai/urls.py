@@ -1,4 +1,4 @@
-"""picture_backend URL Configuration
+"""picture_ai URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url
+
+from picture_ai import views
 
 urlpatterns = [
+    url(r'^$', views.hello_world),
     path('admin/', admin.site.urls),
 ]
