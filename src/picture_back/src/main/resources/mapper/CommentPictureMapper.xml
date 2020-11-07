@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.program.picture.mapper.CommentPictureMapper">
+  <resultMap id="BaseResultMap" type="com.program.picture.domain.entity.CommentPicture">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="comment_id" jdbcType="INTEGER" property="commentId" />
+    <result column="picture_id" jdbcType="INTEGER" property="pictureId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from comment_picture
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.program.picture.domain.entity.CommentPicture">
+    insert into comment_picture (id, comment_id, picture_id, 
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{commentId,jdbcType=INTEGER}, #{pictureId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.program.picture.domain.entity.CommentPicture">
+    update comment_picture
+    set comment_id = #{commentId,jdbcType=INTEGER},
+      picture_id = #{pictureId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, comment_id, picture_id, create_time, update_time
+    from comment_picture
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, comment_id, picture_id, create_time, update_time
+    from comment_picture
+  </select>
+</mapper>
