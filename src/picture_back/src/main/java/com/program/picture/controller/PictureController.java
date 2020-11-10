@@ -4,10 +4,8 @@ import com.program.picture.common.result.HttpResult;
 import com.program.picture.domain.entity.Picture;
 import com.program.picture.service.PictureService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -20,13 +18,35 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/picture")
 public class PictureController {
+    /*
+     *  todo
+     *   图片的添加(已初步完成)
+     *       图片的云端添加
+     *   图片的删除（已完成）
+     *   图片的详情更新（已完成）
+     *
+     * */
 
     @Autowired
     private PictureService pictureService;
 
-    @PostMapping("/addItem")
-    public HttpResult addPicture(@RequestBody @Valid Picture picture) {
-        pictureService.insert(picture);
-        return HttpResult.success();
+    @PostMapping("/addPicture")
+    public HttpResult addPicture(@RequestBody @Validated Picture picture) {
+        return pictureService.insert(picture);
+    }
+
+    @DeleteMapping("/deletePicture")
+    public HttpResult deletePicture(@RequestParam(value = "pictureId") Integer pictureId) {
+        return pictureService.deleteByPrimaryKey(pictureId);
+    }
+
+    @PutMapping("/updatePicture")
+    public HttpResult updatePicture(@RequestBody @Validated Picture picture) {
+        return pictureService.updateByPrimaryKey(picture);
+    }
+
+    @GetMapping("/getPicture")
+    public HttpResult selectPicture(@RequestParam(value = "pictureId") Integer pictureId) {
+        return pictureService.selectByPrimaryKey(pictureId);
     }
 }

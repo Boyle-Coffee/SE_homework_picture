@@ -1,6 +1,9 @@
 package com.program.picture.service;
 
+import com.program.picture.common.result.HttpResult;
 import com.program.picture.domain.entity.Picture;
+
+import java.util.List;
 
 /**
  * @program: picture
@@ -9,5 +12,14 @@ import com.program.picture.domain.entity.Picture;
  * @create: 2020-11-07 20:15
  **/
 public interface PictureService {
-    int insert(Picture record);
+
+    HttpResult deleteByPrimaryKey(Integer id);
+
+    HttpResult insert(Picture record);
+
+    HttpResult selectByPrimaryKey(Integer id);
+
+    HttpResult selectAll();
+
+    HttpResult updateByPrimaryKey(Picture record);
 }
