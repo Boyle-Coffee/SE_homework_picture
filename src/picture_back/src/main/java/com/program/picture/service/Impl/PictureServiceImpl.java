@@ -41,6 +41,7 @@ public class PictureServiceImpl implements PictureService {
 
     @Override
     public HttpResult insert(Picture record) {
+        // todo  违规图片 ——》 ——》 以图搜图（放入数据库）——》放云端
         if (pictureMapper.insert(record) == 0) {
             throw new PictureAddFailException("图片添加失败");
         }

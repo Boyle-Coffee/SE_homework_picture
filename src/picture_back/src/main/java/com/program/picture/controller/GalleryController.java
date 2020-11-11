@@ -92,7 +92,7 @@ public class GalleryController {
 
     @PostMapping("/addGalleryCollection")
     public HttpResult addGalleryollection(@RequestParam(value = "userId") Integer userId,
-                                           @RequestParam(value = "pictureId") Integer pictureId) {
+                                          @RequestParam(value = "pictureId") Integer pictureId) {
         return collectionService.insertGalleryCollection(userId, pictureId);
     }
 

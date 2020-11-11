@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public class PictureController {
     /*
      * todo
+     *   图片的查找—根据以图搜图查看相似图片
      *   图片的添加(已初步完成)
      *       图片的云端添加
      *   图片的删除（已完成）
