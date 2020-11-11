@@ -3,6 +3,7 @@ package com.program.picture.controller;
 import com.program.picture.common.result.HttpResult;
 import com.program.picture.domain.entity.Picture;
 import com.program.picture.service.CollectionService;
+import com.program.picture.service.LikeService;
 import com.program.picture.service.PictureService;
 import com.program.picture.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,15 @@ public class PictureController {
      *   添加图片进入我的收藏（已完成）
      *   删除我的收藏的图片（已完成）
      *
+     * todo
+     *   查看用户喜欢的图片（已完成）
+     *   添加图片进入我的喜欢（已完成）
+     *   删除我的喜欢的图片（已完成）
+     *
      * */
+
+    @Autowired
+    private LikeService likeService;
 
     @Autowired
     private TypeService typeService;
@@ -100,6 +109,23 @@ public class PictureController {
     @GetMapping("/getPictureCollection")
     public HttpResult selectPictureCollection(@RequestParam(value = "userId") Integer userId) {
         return collectionService.selectPictureCollection(userId);
+    }
+
+    @DeleteMapping("/deletePictureLike")
+    public HttpResult deletePictureLike(@RequestParam(value = "userId") Integer userId,
+                                        @RequestParam(value = "pictureId") Integer pictureId) {
+        return likeService.deletePictureLike(userId, pictureId);
+    }
+
+    @PostMapping("/addPictureLike")
+    public HttpResult addPictureLike(@RequestParam(value = "userId") Integer userId,
+                                     @RequestParam(value = "pictureId") Integer pictureId) {
+        return likeService.addPictureLike(userId, pictureId);
+    }
+
+    @GetMapping("/getPictureLike")
+    public HttpResult selectPictureLike(@RequestParam(value = "userId") Integer userId) {
+        return likeService.selectPictureLike(userId);
     }
 
 }

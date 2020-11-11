@@ -2,6 +2,8 @@ package com.program.picture.common.exception;
 
 import com.program.picture.common.exception.collection.PictureCollectionAddFailException;
 import com.program.picture.common.exception.collection.PictureCollectionDelFailException;
+import com.program.picture.common.exception.like.PictureLikeAddFailException;
+import com.program.picture.common.exception.like.PictureLikeDelFailException;
 import com.program.picture.common.exception.picture.PictureAddFailException;
 import com.program.picture.common.exception.picture.PictureDelFailException;
 import com.program.picture.common.exception.picture.PictureSelectFailException;
@@ -77,5 +79,18 @@ public class GlobalExceptionHandler {
     public HttpResult pictureCollectionDelFailExceptionHandler(PictureCollectionDelFailException e) {
         logger.error("发生业务异常！原因是：{}", e.getMsg());
         return HttpResult.failure(PictureCollection_Del_Fail_Exception);
+    }
+
+    // 喜欢模块
+    @ExceptionHandler(value = PictureLikeAddFailException.class)
+    public HttpResult pictureLikeAddFailExceptionHandler(PictureLikeAddFailException e) {
+        logger.error("发生业务异常！原因是：{}", e.getMsg());
+        return HttpResult.failure(PictureLike_Add_Fail_Exception);
+    }
+
+    @ExceptionHandler(value = PictureLikeDelFailException.class)
+    public HttpResult pictureLikeDelFailExceptionHandler(PictureLikeDelFailException e) {
+        logger.error("发生业务异常！原因是：{}", e.getMsg());
+        return HttpResult.failure(PictureLike_Del_Fail_Exception);
     }
 }

@@ -18,4 +18,6 @@ public interface PictureLikeMapper {
     List<PictureLike> selectAll();
 
     int updateByPrimaryKey(PictureLike record);
+
+    List<PictureLike> selectByUserId(Integer userId);
 }
