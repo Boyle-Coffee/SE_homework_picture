@@ -1,6 +1,4 @@
 from image_utils.models.extract_cnn_vgg16_keras import VGGNet
-from image_utils.image_mysql import Image_mysql
-# import matplotlib.pyplot as plt
 from transform_data import *
 import numpy as np
 import traceback
