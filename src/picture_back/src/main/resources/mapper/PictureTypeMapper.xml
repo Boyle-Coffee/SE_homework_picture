@@ -35,4 +35,10 @@
     select id, picture_id, type_id, create_time, update_time
     from picture_type
   </select>
+  <select id="selectByPictureId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, picture_id, type_id, create_time, update_time
+    from picture_type
+    where picture_id = #{pictureId,jdbcType=INTEGER}
+  </select>
+
 </mapper>

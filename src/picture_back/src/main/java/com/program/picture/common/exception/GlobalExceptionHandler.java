@@ -4,6 +4,8 @@ import com.program.picture.common.exception.picture.PictureAddFailException;
 import com.program.picture.common.exception.picture.PictureDelFailException;
 import com.program.picture.common.exception.picture.PictureSelectFailException;
 import com.program.picture.common.exception.picture.PictureUpdateFailException;
+import com.program.picture.common.exception.type.PictureTypeAddFailException;
+import com.program.picture.common.exception.type.PictureTypeDelFailException;
 import com.program.picture.common.result.HttpResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +49,19 @@ public class GlobalExceptionHandler {
     public HttpResult pictureSelectFailExceptionHandler(PictureSelectFailException e) {
         logger.error("发生业务异常！原因是：{}", e.getMsg());
         return HttpResult.failure(Picture_Select_Fail_Exception);
+    }
+
+    // 标签模式
+    @ExceptionHandler(value = PictureTypeAddFailException.class)
+    public HttpResult pictureTypeAddFailExceptionHandler(PictureTypeAddFailException e) {
+        logger.error("发生业务异常！原因是：{}", e.getMsg());
+        return HttpResult.failure(PictureType_Add_Fail_Exception);
+    }
+
+    @ExceptionHandler(value = PictureTypeDelFailException.class)
+    public HttpResult pictureTypeDelFailExceptionHandler(PictureTypeDelFailException e) {
+        logger.error("发生业务异常！原因是：{}", e.getMsg());
+        return HttpResult.failure(PictureType_Del_Fail_Exception);
     }
 
 }
