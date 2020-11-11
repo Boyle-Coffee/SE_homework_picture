@@ -35,4 +35,9 @@
     select id, gallery_id, user_id, create_time, update_time
     from gallery_like
   </select>
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, gallery_id, user_id, create_time, update_time
+    from gallery_like
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
 </mapper>

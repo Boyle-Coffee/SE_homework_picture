@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.program.picture.mapper.GalleyMapper">
-  <resultMap id="BaseResultMap" type="com.program.picture.domain.entity.Galley">
+<mapper namespace="com.program.picture.mapper.GalleryMapper">
+  <resultMap id="BaseResultMap" type="com.program.picture.domain.entity.Gallery">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -13,7 +13,7 @@
     delete from galley
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.program.picture.domain.entity.Galley">
+  <insert id="insert" parameterType="com.program.picture.domain.entity.Gallery">
     insert into galley (id, user_id, name, 
       open, create_time, update_time
       )
@@ -21,7 +21,7 @@
       #{open,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.program.picture.domain.entity.Galley">
+  <update id="updateByPrimaryKey" parameterType="com.program.picture.domain.entity.Gallery">
     update galley
     set user_id = #{userId,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},

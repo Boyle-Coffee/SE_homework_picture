@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 @Builder
-public class Picture {
+public class Gallery {
     private Integer id;
 
     private Integer userId;
@@ -17,13 +17,12 @@ public class Picture {
 
     private Integer open;
 
-    private String path;
-
     private Date createTime;
 
     private Date updateTime;
 
+
     @Tolerate
-    public Picture() {
+    public Gallery() {
     }
 }
