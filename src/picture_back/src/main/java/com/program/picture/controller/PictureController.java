@@ -2,6 +2,7 @@ package com.program.picture.controller;
 
 import com.program.picture.common.result.HttpResult;
 import com.program.picture.domain.entity.Picture;
+import com.program.picture.service.CollectionService;
 import com.program.picture.service.PictureService;
 import com.program.picture.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +32,21 @@ public class PictureController {
      *   图片标签的添加(已完成)
      *   图片标签的删除（已完成）
      *
+     * todo
+     *   查看用户收藏的图片（已完成）
+     *   添加图片进入我的收藏（已完成）
+     *   删除我的收藏的图片（已完成）
+     *
      * */
+
+    @Autowired
+    private TypeService typeService;
 
     @Autowired
     private PictureService pictureService;
 
     @Autowired
-    private TypeService typeService;
+    private CollectionService collectionService;
 
     @PostMapping("/addPicture")
     public HttpResult addPicture(@RequestBody @Validated Picture picture) {
@@ -70,9 +79,27 @@ public class PictureController {
         return typeService.deletePictureType(typeId, pictureId);
     }
 
-    @PostMapping("/addPicture")
+    @PostMapping("/addPictureType")
     public HttpResult addPictureType(@RequestParam(value = "typeId") Integer typeId,
                                      @RequestParam(value = "pictureId") Integer pictureId) {
         return typeService.insertPictureType(typeId, pictureId);
     }
+
+    @DeleteMapping("/deletePictureCollection")
+    public HttpResult deletePictureCollection(@RequestParam(value = "userId") Integer userId,
+                                              @RequestParam(value = "pictureId") Integer pictureId) {
+        return collectionService.delectPictureCollection(userId, pictureId);
+    }
+
+    @PostMapping("/addPictureCollection")
+    public HttpResult addPictureCollection(@RequestParam(value = "userId") Integer userId,
+                                           @RequestParam(value = "pictureId") Integer pictureId) {
+        return collectionService.insertPictureCollection(userId, pictureId);
+    }
+
+    @GetMapping("/getPictureCollection")
+    public HttpResult selectPictureCollection(@RequestParam(value = "userId") Integer userId) {
+        return collectionService.selectPictureCollection(userId);
+    }
+
 }

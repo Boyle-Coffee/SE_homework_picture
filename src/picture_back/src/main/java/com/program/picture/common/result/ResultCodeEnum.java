@@ -31,7 +31,9 @@ public enum  ResultCodeEnum {
     // 3000～3999 区间表示标签模块错误
     PictureType_Add_Fail_Exception(30001,"图片标签添加失败"),
     PictureType_Del_Fail_Exception(30002,"图片标签删除失败"),
-    // 。。。
+    // 4000～4999 区间表示收藏模块错误
+    PictureCollection_Add_Fail_Exception(40001,"图片收藏添加失败"),
+    PictureCollection_Del_Fail_Exception(40002,"图片收藏删除失败"),
 
 
     ;

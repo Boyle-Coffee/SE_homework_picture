@@ -18,4 +18,6 @@ public interface PictureCollectionMapper {
     List<PictureCollection> selectAll();
 
     int updateByPrimaryKey(PictureCollection record);
+
+    List<PictureCollection> selectByUserId(Integer userId);
 }
