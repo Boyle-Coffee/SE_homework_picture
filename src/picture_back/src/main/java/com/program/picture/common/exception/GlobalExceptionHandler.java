@@ -2,10 +2,12 @@ package com.program.picture.common.exception;
 
 import com.program.picture.common.exception.collection.PictureCollectionAddFailException;
 import com.program.picture.common.exception.collection.PictureCollectionDelFailException;
-import com.program.picture.common.exception.galley.GalleyAddFailException;
-import com.program.picture.common.exception.galley.GalleyDelFailException;
-import com.program.picture.common.exception.galley.GalleySelectFailException;
-import com.program.picture.common.exception.galley.GalleyUpdateFailException;
+import com.program.picture.common.exception.gallery.GalleryAddFailException;
+import com.program.picture.common.exception.gallery.GalleryDelFailException;
+import com.program.picture.common.exception.gallery.GallerySelectFailException;
+import com.program.picture.common.exception.gallery.GalleryUpdateFailException;
+import com.program.picture.common.exception.like.GalleryLikeAddFailException;
+import com.program.picture.common.exception.like.GalleryLikeDelFailException;
 import com.program.picture.common.exception.like.PictureLikeAddFailException;
 import com.program.picture.common.exception.like.PictureLikeDelFailException;
 import com.program.picture.common.exception.picture.PictureAddFailException;
@@ -15,6 +17,7 @@ import com.program.picture.common.exception.picture.PictureUpdateFailException;
 import com.program.picture.common.exception.type.PictureTypeAddFailException;
 import com.program.picture.common.exception.type.PictureTypeDelFailException;
 import com.program.picture.common.result.HttpResult;
+import com.program.picture.domain.entity.Gallery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -98,28 +101,40 @@ public class GlobalExceptionHandler {
         return HttpResult.failure(PictureLike_Del_Fail_Exception);
     }
 
+    @ExceptionHandler(value = GalleryLikeAddFailException.class)
+    public HttpResult galleryLikeAddFailExceptionHandler(GalleryLikeAddFailException e) {
+        logger.error("发生业务异常！原因是：{}", e.getMsg());
+        return HttpResult.failure(GalleryLike_Add_Fail_Exception);
+    }
+
+    @ExceptionHandler(value = GalleryLikeDelFailException.class)
+    public HttpResult galleryLikeDelFailExceptionHandler(GalleryLikeDelFailException e) {
+        logger.error("发生业务异常！原因是：{}", e.getMsg());
+        return HttpResult.failure(GalleryLike_Del_Fail_Exception);
+    }
+
     // 图库模块
-    @ExceptionHandler(value = GalleyDelFailException.class)
-    public HttpResult galleyDelFailExceptionHandler(GalleyDelFailException e) {
+    @ExceptionHandler(value = GalleryDelFailException.class)
+    public HttpResult galleyDelFailExceptionHandler(GalleryDelFailException e) {
         logger.error("发生业务异常！原因是：{}", e.getMsg());
-        return HttpResult.failure(Galley_Del_Fail_Exception);
+        return HttpResult.failure(Gallery_Del_Fail_Exception);
     }
 
-    @ExceptionHandler(value = GalleyAddFailException.class)
-    public HttpResult galleyAddFailExceptionHandler(GalleyAddFailException e) {
+    @ExceptionHandler(value = GalleryAddFailException.class)
+    public HttpResult galleyAddFailExceptionHandler(GalleryAddFailException e) {
         logger.error("发生业务异常！原因是：{}", e.getMsg());
-        return HttpResult.failure(Galley_Add_Fail_Exception);
+        return HttpResult.failure(Gallery_Add_Fail_Exception);
     }
 
-    @ExceptionHandler(value = GalleyUpdateFailException.class)
-    public HttpResult galleyUpdateFailExceptionHandler(GalleyUpdateFailException e) {
+    @ExceptionHandler(value = GalleryUpdateFailException.class)
+    public HttpResult galleyUpdateFailExceptionHandler(GalleryUpdateFailException e) {
         logger.error("发生业务异常！原因是：{}", e.getMsg());
-        return HttpResult.failure(Galley_Update_Fail_Exception);
+        return HttpResult.failure(Gallery_Update_Fail_Exception);
     }
 
-    @ExceptionHandler(value = GalleySelectFailException.class)
-    public HttpResult galleySelectFailExceptionHandler(GalleySelectFailException e) {
+    @ExceptionHandler(value = GallerySelectFailException.class)
+    public HttpResult galleySelectFailExceptionHandler(GallerySelectFailException e) {
         logger.error("发生业务异常！原因是：{}", e.getMsg());
-        return HttpResult.failure(Galley_Select_Fail_Exception);
+        return HttpResult.failure(Gallery_Select_Fail_Exception);
     }
 }

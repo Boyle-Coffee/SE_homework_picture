@@ -8,18 +8,21 @@ import java.util.Date;
 
 @Data
 @Builder
-public class GalleryLike {
+public class Gallery {
     private Integer id;
 
-    private Integer galleryId;
-
     private Integer userId;
+
+    private String name;
+
+    private Integer open;
 
     private Date createTime;
 
     private Date updateTime;
 
+
     @Tolerate
-    public GalleryLike() {
+    public Gallery() {
     }
 }

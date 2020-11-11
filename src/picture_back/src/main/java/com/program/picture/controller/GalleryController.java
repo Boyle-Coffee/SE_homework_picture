@@ -1,10 +1,10 @@
 package com.program.picture.controller;
 
-import java.security.acl.Group;
-
 import com.program.picture.common.result.HttpResult;
-import com.program.picture.domain.entity.Galley;
-import com.program.picture.service.GalleyService;
+import com.program.picture.domain.entity.Gallery;
+import com.program.picture.service.CollectionService;
+import com.program.picture.service.GalleryService;
+import com.program.picture.service.LikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
  **/
 @RestController
 @RequestMapping("/gallery")
-public class GalleyController {
+public class GalleryController {
     /*
      * todo
      *  图库的查找（已完成）
@@ -39,26 +39,34 @@ public class GalleyController {
      * */
 
     @Autowired
-    private GalleyService galleyService;
+    private LikeService likeService;
+
+    @Autowired
+    private GalleryService galleryService;
+
+    @Autowired
+    private CollectionService conllectionService;
 
     @PostMapping("/addGalley")
-    public HttpResult addGalley(@RequestBody @Validated Galley galley) {
-        return galleyService.insert(galley);
+    public HttpResult addGalley(@RequestBody @Validated Gallery gallery) {
+        return galleryService.insert(gallery);
     }
 
     @GetMapping("/getGalley")
     public HttpResult selectGalley(@RequestParam(value = "galleyId") Integer galleyId) {
-        return galleyService.selectByPrimaryKey(galleyId);
+        return galleryService.selectByPrimaryKey(galleyId);
     }
 
     @DeleteMapping("/deleteGalley")
     public HttpResult deleteGalley(@RequestParam(value = "galleyId") Integer galleyId) {
-        return galleyService.deleteByPrimaryKey(galleyId);
+        return galleryService.deleteByPrimaryKey(galleyId);
     }
 
     @PutMapping("/updateGalley")
-    public HttpResult updateGalley(@RequestBody @Validated Galley galley) {
-        return galleyService.updateByPrimaryKey(galley);
+    public HttpResult updateGalley(@RequestBody @Validated Gallery gallery) {
+        return galleryService.updateByPrimaryKey(gallery);
     }
+
+
 
 }

@@ -1,4 +1,4 @@
-package com.program.picture.common.exception.galley;
+package com.program.picture.common.exception.gallery;
 
 /**
  * @program: picture
@@ -6,7 +6,7 @@ package com.program.picture.common.exception.galley;
  * @author: Mr.Huang
  * @create: 2020-11-10 22:13
  **/
-public class GalleyAddFailException extends RuntimeException {
+public class GalleryDelFailException extends RuntimeException {
     /**
      * 错误码
      */
@@ -31,7 +31,7 @@ public class GalleyAddFailException extends RuntimeException {
      *
      * @param msg
      */
-    public GalleyAddFailException(String msg) {
+    public GalleryDelFailException(String msg) {
         super(msg);
         this.msg = msg;
     }

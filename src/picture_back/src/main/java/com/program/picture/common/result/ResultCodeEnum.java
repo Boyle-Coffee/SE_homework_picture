@@ -37,11 +37,13 @@ public enum ResultCodeEnum {
     // 5000～5999 区间表示喜欢模块错误
     PictureLike_Add_Fail_Exception(50001, "图片喜欢添加失败"),
     PictureLike_Del_Fail_Exception(50002, "图片喜欢删除失败"),
+    GalleryLike_Add_Fail_Exception(50003, "图库喜欢添加失败"),
+    GalleryLike_Del_Fail_Exception(50004, "图库喜欢删除失败"),
     // 6000～6999 区间表示图库模块错误
-    Galley_Del_Fail_Exception(60001, "图库删除失败"),
-    Galley_Add_Fail_Exception(60002, "图库添加失败"),
-    Galley_Update_Fail_Exception(60003, "图库更新失败"),
-    Galley_Select_Fail_Exception(60004, "图库查找失败"),
+    Gallery_Del_Fail_Exception(60001, "图库删除失败"),
+    Gallery_Add_Fail_Exception(60002, "图库添加失败"),
+    Gallery_Update_Fail_Exception(60003, "图库更新失败"),
+    Gallery_Select_Fail_Exception(60004, "图库查找失败"),
 
 
     ;

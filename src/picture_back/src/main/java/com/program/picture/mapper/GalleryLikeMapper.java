@@ -18,4 +18,6 @@ public interface GalleryLikeMapper {
     List<GalleryLike> selectAll();
 
     int updateByPrimaryKey(GalleryLike record);
+
+    List<GalleryLike> selectByUserId(Integer userId);
 }

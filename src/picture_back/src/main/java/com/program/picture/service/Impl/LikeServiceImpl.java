@@ -1,10 +1,16 @@
 package com.program.picture.service.Impl;
 
+import com.program.picture.common.exception.like.GalleryLikeAddFailException;
+import com.program.picture.common.exception.like.GalleryLikeDelFailException;
 import com.program.picture.common.exception.like.PictureLikeDelFailException;
 import com.program.picture.common.exception.picture.PictureAddFailException;
 import com.program.picture.common.result.HttpResult;
+import com.program.picture.domain.entity.Gallery;
+import com.program.picture.domain.entity.GalleryLike;
 import com.program.picture.domain.entity.Picture;
 import com.program.picture.domain.entity.PictureLike;
+import com.program.picture.mapper.GalleryLikeMapper;
+import com.program.picture.mapper.GalleryMapper;
 import com.program.picture.mapper.PictureLikeMapper;
 import com.program.picture.mapper.PictureMapper;
 import com.program.picture.service.LikeService;
@@ -24,7 +30,13 @@ import java.util.List;
 public class LikeServiceImpl implements LikeService {
 
     @Autowired
+    private GalleryMapper galleryMapper;
+
+    @Autowired
     private PictureMapper pictureMapper;
+
+    @Autowired
+    private GalleryLikeMapper galleryLikeMapper;
 
     @Autowired
     private PictureLikeMapper pictureLikeMapper;
@@ -71,6 +83,60 @@ public class LikeServiceImpl implements LikeService {
             throw new PictureAddFailException("喜欢图片添加失败");
         }
         return HttpResult.success();
+    }
+
+    @Override
+    public HttpResult selectGalleyLike(Integer userId) {
+        List<GalleryLike> galleryLikeList = galleryLikeMapper.selectByUserId(userId);
+        List<Gallery> galleryList = new ArrayList<>();
+        for (GalleryLike galleryLike : galleryLikeList) {
+            Gallery gallery = galleryMapper.selectByPrimaryKey(galleryLike.getId());
+            galleryList.add(gallery);
+        }
+        if (galleryList.size() == 0) {
+            return HttpResult.success("该用户无添加喜欢的图库");
+        }
+        return HttpResult.success(galleryList);
+    }
+
+    @Override
+    public HttpResult deleteGalleyLike(Integer userId, Integer galleyId) {
+        int delete = 1;
+        List<GalleryLike> galleryLikeList = galleryLikeMapper.selectByUserId(userId);
+        for (GalleryLike galleryLike : galleryLikeList) {
+            if (galleryLike.getGalleryId().equals(galleyId)) {
+                delete = galleryLikeMapper.deleteByPrimaryKey(galleryLike.getId());
+            }
+        }
+        if (delete == 0) {
+            throw new GalleryLikeDelFailException("喜欢图库删除失败");
+        }
+        return HttpResult.success();
+    }
+
+    @Override
+    public HttpResult addGalleyLike(Integer userId, Integer galleyId) {
+        GalleryLike galleryLike = GalleryLike.builder()
+                .userId(userId)
+                .galleryId(galleyId)
+                .build();
+        if (judgeGalleryLike(userId, galleyId)) {
+            return HttpResult.success("该图库存在我的喜欢中");
+        }
+        if (galleryLikeMapper.insert(galleryLike) == 0) {
+            throw new GalleryLikeAddFailException("喜欢图库添加失败");
+        }
+        return HttpResult.success();
+    }
+
+    private boolean judgeGalleryLike(Integer userId, Integer galleyId) {
+        List<GalleryLike> galleryLikeList = galleryLikeMapper.selectByUserId(userId);
+        for (GalleryLike galleryLike : galleryLikeList) {
+            if (galleryLike.getGalleryId().equals(galleyId)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean judgePictureLike(Integer userId, Integer pictureId) {
