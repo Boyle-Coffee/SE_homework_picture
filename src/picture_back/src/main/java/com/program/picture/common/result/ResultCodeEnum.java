@@ -20,9 +20,14 @@ public enum  ResultCodeEnum {
     // 1000～1999 区间表示用户模块错误
     User_Exists_Exception(10001,"用户已存在"),
     User_Not_Exists_Exception(10002,"用户不存在"),
-    // 2000～2999 区间表示订单模块错误
+    // 2000～2999 区间表示图片模块错误
+    Picture_Del_Fail_Exception(20001,"图片删除失败"),
+    Picture_Add_Fail_Exception(20002,"图片添加失败"),
+    Picture_Update_Fail_Exception(20003,"图片更新失败"),
+    Picture_Select_Fail_Exception(20004,"图片查找失败"),
     // 3000～3999 区间表示商品模块错误
     // 。。。
+
 
     ;
 
