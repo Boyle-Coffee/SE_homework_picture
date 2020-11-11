@@ -22,4 +22,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.hello_world),
     path('admin/', admin.site.urls),
+    path('imageInsert/', views.image_insert_view),  # 以图搜图图像录入
+    path('imageSearch/', views.image_search_view),  # 以图搜图相似图查找
+    path('imageRecognition/', views.image_reco_view)  # 违规图像识别
 ]
