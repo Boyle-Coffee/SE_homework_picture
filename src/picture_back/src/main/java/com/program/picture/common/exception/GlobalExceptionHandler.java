@@ -2,6 +2,10 @@ package com.program.picture.common.exception;
 
 import com.program.picture.common.exception.collection.PictureCollectionAddFailException;
 import com.program.picture.common.exception.collection.PictureCollectionDelFailException;
+import com.program.picture.common.exception.galley.GalleyAddFailException;
+import com.program.picture.common.exception.galley.GalleyDelFailException;
+import com.program.picture.common.exception.galley.GalleySelectFailException;
+import com.program.picture.common.exception.galley.GalleyUpdateFailException;
 import com.program.picture.common.exception.like.PictureLikeAddFailException;
 import com.program.picture.common.exception.like.PictureLikeDelFailException;
 import com.program.picture.common.exception.picture.PictureAddFailException;
@@ -92,5 +96,30 @@ public class GlobalExceptionHandler {
     public HttpResult pictureLikeDelFailExceptionHandler(PictureLikeDelFailException e) {
         logger.error("发生业务异常！原因是：{}", e.getMsg());
         return HttpResult.failure(PictureLike_Del_Fail_Exception);
+    }
+
+    // 图库模块
+    @ExceptionHandler(value = GalleyDelFailException.class)
+    public HttpResult galleyDelFailExceptionHandler(GalleyDelFailException e) {
+        logger.error("发生业务异常！原因是：{}", e.getMsg());
+        return HttpResult.failure(Galley_Del_Fail_Exception);
+    }
+
+    @ExceptionHandler(value = GalleyAddFailException.class)
+    public HttpResult galleyAddFailExceptionHandler(GalleyAddFailException e) {
+        logger.error("发生业务异常！原因是：{}", e.getMsg());
+        return HttpResult.failure(Galley_Add_Fail_Exception);
+    }
+
+    @ExceptionHandler(value = GalleyUpdateFailException.class)
+    public HttpResult galleyUpdateFailExceptionHandler(GalleyUpdateFailException e) {
+        logger.error("发生业务异常！原因是：{}", e.getMsg());
+        return HttpResult.failure(Galley_Update_Fail_Exception);
+    }
+
+    @ExceptionHandler(value = GalleySelectFailException.class)
+    public HttpResult galleySelectFailExceptionHandler(GalleySelectFailException e) {
+        logger.error("发生业务异常！原因是：{}", e.getMsg());
+        return HttpResult.failure(Galley_Select_Fail_Exception);
     }
 }
