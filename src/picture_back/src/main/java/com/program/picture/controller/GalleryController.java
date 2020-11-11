@@ -45,28 +45,59 @@ public class GalleryController {
     private GalleryService galleryService;
 
     @Autowired
-    private CollectionService conllectionService;
+    private CollectionService collectionService;
 
-    @PostMapping("/addGalley")
-    public HttpResult addGalley(@RequestBody @Validated Gallery gallery) {
+    @PostMapping("/addGallery")
+    public HttpResult addGallery(@RequestBody @Validated Gallery gallery) {
         return galleryService.insert(gallery);
     }
 
-    @GetMapping("/getGalley")
-    public HttpResult selectGalley(@RequestParam(value = "galleyId") Integer galleyId) {
+    @GetMapping("/getGallery")
+    public HttpResult getGallery(@RequestParam(value = "galleyId") Integer galleyId) {
         return galleryService.selectByPrimaryKey(galleyId);
     }
 
-    @DeleteMapping("/deleteGalley")
-    public HttpResult deleteGalley(@RequestParam(value = "galleyId") Integer galleyId) {
+    @DeleteMapping("/deleteGallery")
+    public HttpResult deleteGallery(@RequestParam(value = "galleyId") Integer galleyId) {
         return galleryService.deleteByPrimaryKey(galleyId);
     }
 
-    @PutMapping("/updateGalley")
-    public HttpResult updateGalley(@RequestBody @Validated Gallery gallery) {
+    @PutMapping("/updateGallery")
+    public HttpResult updateGallery(@RequestBody @Validated Gallery gallery) {
         return galleryService.updateByPrimaryKey(gallery);
     }
 
+    @DeleteMapping("/deleteGalleryLike")
+    public HttpResult deleteGalleryLike(@RequestParam(value = "userId") Integer userId,
+                                        @RequestParam(value = "pictureId") Integer pictureId) {
+        return likeService.deleteGalleryLike(userId, pictureId);
+    }
 
+    @PostMapping("/addGalleryLike")
+    public HttpResult addGalleryLike(@RequestParam(value = "userId") Integer userId,
+                                     @RequestParam(value = "pictureId") Integer pictureId) {
+        return likeService.addGalleryLike(userId, pictureId);
+    }
 
+    @GetMapping("/getGalleryLike")
+    public HttpResult selectGalleryLike(@RequestParam(value = "userId") Integer userId) {
+        return likeService.selectGalleryLike(userId);
+    }
+
+    @DeleteMapping("/deleteGalleryCollection")
+    public HttpResult deleteGalleryCollection(@RequestParam(value = "userId") Integer userId,
+                                              @RequestParam(value = "pictureId") Integer pictureId) {
+        return collectionService.deleteGalleryCollection(userId, pictureId);
+    }
+
+    @PostMapping("/addGalleryCollection")
+    public HttpResult addGalleryollection(@RequestParam(value = "userId") Integer userId,
+                                           @RequestParam(value = "pictureId") Integer pictureId) {
+        return collectionService.insertGalleryCollection(userId, pictureId);
+    }
+
+    @GetMapping("/getGalleryCollection")
+    public HttpResult selectGalleryCollection(@RequestParam(value = "userId") Integer userId) {
+        return collectionService.selectGalleryCollection(userId);
+    }
 }

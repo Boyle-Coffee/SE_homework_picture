@@ -11,9 +11,9 @@ public interface LikeService {
 
     HttpResult addPictureLike(Integer userId, Integer pictureId);
 
-    HttpResult selectGalleyLike(Integer userId);
+    HttpResult selectGalleryLike(Integer userId);
 
-    HttpResult deleteGalleyLike(Integer userId, Integer galleyId);
+    HttpResult deleteGalleryLike(Integer userId, Integer galleyId);
 
-    HttpResult addGalleyLike(Integer userId, Integer galleyId);
+    HttpResult addGalleryLike(Integer userId, Integer galleyId);
 }

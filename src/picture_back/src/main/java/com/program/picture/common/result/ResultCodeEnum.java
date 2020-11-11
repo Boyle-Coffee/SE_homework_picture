@@ -34,6 +34,8 @@ public enum ResultCodeEnum {
     // 4000～4999 区间表示收藏模块错误
     PictureCollection_Add_Fail_Exception(40001, "图片收藏添加失败"),
     PictureCollection_Del_Fail_Exception(40002, "图片收藏删除失败"),
+    GalleryCollection_Add_Fail_Exception(40003, "图库收藏添加失败"),
+    GalleryCollection_Del_Fail_Exception(40004, "图库收藏删除失败"),
     // 5000～5999 区间表示喜欢模块错误
     PictureLike_Add_Fail_Exception(50001, "图片喜欢添加失败"),
     PictureLike_Del_Fail_Exception(50002, "图片喜欢删除失败"),

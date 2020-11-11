@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-
 /**
  * @program: picture
  * @description:
@@ -97,7 +95,7 @@ public class PictureController {
     @DeleteMapping("/deletePictureCollection")
     public HttpResult deletePictureCollection(@RequestParam(value = "userId") Integer userId,
                                               @RequestParam(value = "pictureId") Integer pictureId) {
-        return collectionService.delectPictureCollection(userId, pictureId);
+        return collectionService.deletePictureCollection(userId, pictureId);
     }
 
     @PostMapping("/addPictureCollection")

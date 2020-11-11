@@ -86,7 +86,7 @@ public class LikeServiceImpl implements LikeService {
     }
 
     @Override
-    public HttpResult selectGalleyLike(Integer userId) {
+    public HttpResult selectGalleryLike(Integer userId) {
         List<GalleryLike> galleryLikeList = galleryLikeMapper.selectByUserId(userId);
         List<Gallery> galleryList = new ArrayList<>();
         for (GalleryLike galleryLike : galleryLikeList) {
@@ -100,7 +100,7 @@ public class LikeServiceImpl implements LikeService {
     }
 
     @Override
-    public HttpResult deleteGalleyLike(Integer userId, Integer galleyId) {
+    public HttpResult deleteGalleryLike(Integer userId, Integer galleyId) {
         int delete = 1;
         List<GalleryLike> galleryLikeList = galleryLikeMapper.selectByUserId(userId);
         for (GalleryLike galleryLike : galleryLikeList) {
@@ -115,7 +115,7 @@ public class LikeServiceImpl implements LikeService {
     }
 
     @Override
-    public HttpResult addGalleyLike(Integer userId, Integer galleyId) {
+    public HttpResult addGalleryLike(Integer userId, Integer galleyId) {
         GalleryLike galleryLike = GalleryLike.builder()
                 .userId(userId)
                 .galleryId(galleyId)
