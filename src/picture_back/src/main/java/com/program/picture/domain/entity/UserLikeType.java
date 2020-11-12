@@ -1,7 +1,10 @@
 package com.program.picture.domain.entity;
 
+import lombok.Builder;
+
 import java.util.Date;
 
+@Builder
 public class UserLikeType {
     private Integer id;
 
