@@ -4,10 +4,7 @@ import com.program.picture.common.exception.collection.GalleryCollectionAddFailE
 import com.program.picture.common.exception.collection.GalleryCollectionDelFailException;
 import com.program.picture.common.exception.collection.PictureCollectionAddFailException;
 import com.program.picture.common.exception.collection.PictureCollectionDelFailException;
-import com.program.picture.common.exception.gallery.GalleryAddFailException;
-import com.program.picture.common.exception.gallery.GalleryDelFailException;
-import com.program.picture.common.exception.gallery.GallerySelectFailException;
-import com.program.picture.common.exception.gallery.GalleryUpdateFailException;
+import com.program.picture.common.exception.gallery.*;
 import com.program.picture.common.exception.like.GalleryLikeAddFailException;
 import com.program.picture.common.exception.like.GalleryLikeDelFailException;
 import com.program.picture.common.exception.like.PictureLikeAddFailException;
@@ -150,5 +147,17 @@ public class GlobalExceptionHandler {
     public HttpResult galleySelectFailExceptionHandler(GallerySelectFailException e) {
         logger.error("发生业务异常！原因是：{}", e.getMsg());
         return HttpResult.failure(Gallery_Select_Fail_Exception);
+    }
+
+    @ExceptionHandler(value = GalleryPictureDelFailException.class)
+    public HttpResult galleyPictureDelFailExceptionHandler(GalleryPictureDelFailException e) {
+        logger.error("发生业务异常！原因是：{}", e.getMsg());
+        return HttpResult.failure(GalleryPicture_Del_Fail_Exception);
+    }
+
+    @ExceptionHandler(value = GalleryPictureAddFailException.class)
+    public HttpResult galleyPictureAddFailExceptionHandler(GalleryPictureAddFailException e) {
+        logger.error("发生业务异常！原因是：{}", e.getMsg());
+        return HttpResult.failure(GalleryPicture_Add_Fail_Exception);
     }
 }

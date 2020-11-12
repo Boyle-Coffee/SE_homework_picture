@@ -18,4 +18,6 @@ public interface GalleryPictureMapper {
     List<GalleryPicture> selectAll();
 
     int updateByPrimaryKey(GalleryPicture record);
+
+    List<GalleryPicture> selectByGalleryId(Integer galleryId);
 }

@@ -14,4 +14,8 @@ public interface GalleryService {
     HttpResult selectAll();
 
     HttpResult updateByPrimaryKey(Gallery record);
+
+    HttpResult insertGalleryPicture(Integer galleryId, Integer pictureId);
+
+    HttpResult deleteGalleryPicture(Integer galleryId, Integer pictureId);
 }

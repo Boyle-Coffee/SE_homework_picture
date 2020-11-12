@@ -30,12 +30,12 @@ public class GalleryController {
      *  删除图库中的图片
      *
      * todo
-     *  添加图库收藏
-     *  删除图库收藏
+     *  添加图库收藏（已完成）
+     *  删除图库收藏（已完成）
      *
      * todo
-     *  添加图库喜欢
-     *  删除图库喜欢
+     *  添加图库喜欢（已完成）
+     *  删除图库喜欢（已完成）
      * */
 
     @Autowired
@@ -99,5 +99,17 @@ public class GalleryController {
     @GetMapping("/getGalleryCollection")
     public HttpResult selectGalleryCollection(@RequestParam(value = "userId") Integer userId) {
         return collectionService.selectGalleryCollection(userId);
+    }
+
+    @DeleteMapping("/deleteGalleryPicture")
+    public HttpResult deleteGalleryPicture(@RequestParam(value = "galleryId") Integer galleryId,
+                                           @RequestParam(value = "pictureId") Integer pictureId) {
+        return galleryService.deleteGalleryPicture(galleryId, pictureId);
+    }
+
+    @PostMapping("/addGalleryPicture")
+    public HttpResult addGalleryPicture(@RequestParam(value = "galleryId") Integer galleryId,
+                                        @RequestParam(value = "pictureId") Integer pictureId) {
+        return galleryService.insertGalleryPicture(galleryId, pictureId);
     }
 }

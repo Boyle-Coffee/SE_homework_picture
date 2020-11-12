@@ -46,6 +46,8 @@ public enum ResultCodeEnum {
     Gallery_Add_Fail_Exception(60002, "图库添加失败"),
     Gallery_Update_Fail_Exception(60003, "图库更新失败"),
     Gallery_Select_Fail_Exception(60004, "图库查找失败"),
+    GalleryPicture_Del_Fail_Exception(60005, "图库图片删除失败"),
+    GalleryPicture_Add_Fail_Exception(60006, "图库图片添加失败"),
 
 
     ;

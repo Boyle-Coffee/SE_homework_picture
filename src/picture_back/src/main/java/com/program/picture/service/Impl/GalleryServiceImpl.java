@@ -1,12 +1,11 @@
 package com.program.picture.service.Impl;
 
-import com.program.picture.common.exception.gallery.GalleryAddFailException;
-import com.program.picture.common.exception.gallery.GalleryDelFailException;
-import com.program.picture.common.exception.gallery.GallerySelectFailException;
-import com.program.picture.common.exception.gallery.GalleryUpdateFailException;
+import com.program.picture.common.exception.gallery.*;
 import com.program.picture.common.result.HttpResult;
 import com.program.picture.domain.entity.Gallery;
+import com.program.picture.domain.entity.GalleryPicture;
 import com.program.picture.mapper.GalleryMapper;
+import com.program.picture.mapper.GalleryPictureMapper;
 import com.program.picture.service.GalleryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +23,9 @@ public class GalleryServiceImpl implements GalleryService {
 
     @Autowired
     private GalleryMapper galleryMapper;
+
+    @Autowired
+    private GalleryPictureMapper galleryPictureMapper;
 
     @Override
     public HttpResult deleteByPrimaryKey(Integer id) {
@@ -66,4 +68,33 @@ public class GalleryServiceImpl implements GalleryService {
         }
         return HttpResult.success();
     }
+
+    @Override
+    public HttpResult insertGalleryPicture(Integer galleryId, Integer pictureId) {
+        GalleryPicture galleryPicture = GalleryPicture.builder()
+                .galleryId(galleryId)
+                .pictureId(pictureId)
+                .build();
+        if (galleryPictureMapper.insert(galleryPicture) == 0) {
+            throw new GalleryPictureAddFailException("图库图片添加失败");
+        }
+        return HttpResult.success();
+    }
+
+    @Override
+    public HttpResult deleteGalleryPicture(Integer galleryId, Integer pictureId) {
+        int delete = 1;
+        List<GalleryPicture> galleryPictureList = galleryPictureMapper.selectByGalleryId(galleryId);
+        for (GalleryPicture galleryPicture : galleryPictureList) {
+            if (galleryPicture.getPictureId().equals(pictureId)) {
+                delete = galleryPictureMapper.deleteByPrimaryKey(galleryPicture.getId());
+            }
+        }
+        if (delete == 0) {
+            throw new GalleryPictureDelFailException("图库图片删除失败");
+        }
+        return HttpResult.success();
+    }
+
+
 }
