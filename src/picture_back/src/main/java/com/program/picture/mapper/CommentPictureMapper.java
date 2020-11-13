@@ -18,4 +18,6 @@ public interface CommentPictureMapper {
     List<CommentPicture> selectAll();
 
     int updateByPrimaryKey(CommentPicture record);
+
+    List<CommentPicture> selectByPictureId(Integer pictureId);
 }

@@ -54,17 +54,17 @@
 <!--        <table tableName="user_like_type" domainObjectName="UserLikeType"/>-->
 <!--        <table tableName="user_follow" domainObjectName="UserFollow"/>-->
 <!--        <table tableName="type" domainObjectName="Type"/>-->
-        <table tableName="picture" domainObjectName="Picture"/>
+<!--        <table tableName="picture" domainObjectName="Picture"/>-->
 <!--        <table tableName="picture_type" domainObjectName="PictureType"/>-->
 <!--        <table tableName="picture_collection" domainObjectName="PictureCollection"/>-->
 <!--        <table tableName="picture_like" domainObjectName="PictureLike"/>-->
-        <table tableName="galley" domainObjectName="Galley"/>
+<!--        <table tableName="galley" domainObjectName="Galley"/>-->
 <!--        <table tableName="gallery_picture" domainObjectName="GalleryPicture"/>-->
 <!--        <table tableName="gallery_collection" domainObjectName="GalleryCollection"/>-->
 <!--        <table tableName="gallery_like" domainObjectName="GalleryLike"/>-->
 <!--        <table tableName="comment" domainObjectName="Comment"/>-->
-<!--        <table tableName="comment_picture" domainObjectName="CommentPicture"/>-->
-<!--        <table tableName="comment_gallery" domainObjectName="CommentGallery"/>-->
+        <table tableName="comment_picture" domainObjectName="CommentPicture"/>
+        <table tableName="comment_gallery" domainObjectName="CommentGallery"/>
 <!--        <table tableName="message" domainObjectName="Message"/>-->
     </context>
 

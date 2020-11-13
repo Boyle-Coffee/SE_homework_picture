@@ -1,13 +1,21 @@
 package com.program.picture.domain.entity;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.experimental.Tolerate;
+
 import java.util.Date;
 
+@Data
+@Builder
 public class CommentPicture {
     private Integer id;
 
-    private Integer commentId;
+    private Integer userId;
 
     private Integer pictureId;
+
+    private String content;
 
     private Date createTime;
 
@@ -21,12 +29,12 @@ public class CommentPicture {
         this.id = id;
     }
 
-    public Integer getCommentId() {
-        return commentId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setCommentId(Integer commentId) {
-        this.commentId = commentId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getPictureId() {
@@ -35,6 +43,14 @@ public class CommentPicture {
 
     public void setPictureId(Integer pictureId) {
         this.pictureId = pictureId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 
     public Date getCreateTime() {
@@ -51,5 +67,9 @@ public class CommentPicture {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Tolerate
+    public CommentPicture() {
     }
 }

@@ -18,4 +18,6 @@ public interface CommentGalleryMapper {
     List<CommentGallery> selectAll();
 
     int updateByPrimaryKey(CommentGallery record);
+
+    List<CommentGallery> selectByGalleryId(Integer galleryId);
 }
