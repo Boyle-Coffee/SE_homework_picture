@@ -3,7 +3,11 @@ from transform_data import *
 import numpy as np
 import traceback
 
-root_path = "image_utils/"
+"""
+以图搜图功能
+"""
+
+root_path = "picture_ai/models/pretrain/"
 class ImageRocognition():
     def __init__(self, maxres=3,
                  score_threshold=0.75,
@@ -32,18 +36,18 @@ class ImageRocognition():
     def _load_reconition_model(self):
         # 加载人脸特征提取模型
         if self.net_type == "VGG16":
-            model_path = root_path + "models/pretrained/vgg16_weights_tf_dim_ordering_tf_kernels_notop.h5"
+            model_path = root_path + "vgg16_weights_tf_dim_ordering_tf_kernels_notop.h5"
         elif self.net_type == "ResNet50":
-            model_path = root_path + "models/pretrained/resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5"
+            model_path = root_path + "resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5"
         elif self.net_type == "DenseNet121":
-            model_path = root_path + "models/pretrained/densenet121_weights_tf_dim_ordering_tf_kernels_notop.h5"
+            model_path = root_path + "densenet121_weights_tf_dim_ordering_tf_kernels_notop.h5"
         else:
             raise ValueError("The pretrained model is wrong")
         # self.recognition_net.load(model_path)
         recognition_net = VGGNet(self.net_type, model_path=model_path)
         return recognition_net
 
-    def ImgRearch(self,image):
+    def img_search(self,image):
         """
         图片查询主函数
         Parameter:
@@ -57,7 +61,7 @@ class ImageRocognition():
             scores：图片的相似度得分
         """
         # 获得查询图片对应的特征向量
-        queryvec = self.Query_Img(image)
+        queryvec = self.query_img(image)
         # 获取数据库的图片数据
         feature_mids, feature_uids, feature_strs, img_num, msg = self.db.load_img_info()  # 读取数据库信息
         feats = str_series_to_mat(feature_strs)
@@ -69,12 +73,12 @@ class ImageRocognition():
             print(traceback.format_exc())
             return 500, False, e.args, None
 
-    def Query_Img(self,img):
+    def query_img(self,img):
         """显示查询图片并提取图片特征及名称,返回图片特征"""
         queryVec = self.net.extract_feat(img)
         return queryVec
 
-    def Query_Rearch(self,feats,feature_uids,queryvec,img,maxres=1):
+    def image_search(self,feats,feature_uids,queryvec,img,maxres=1):
         """
         图片查询（计算相似度并返回相似度最大的前3张(默认)图片
         Parameter:
@@ -112,7 +116,7 @@ class ImageRocognition():
             print(traceback.format_exc())
             return 500, False, e.args,  None
 
-    def ImageInsert(self,img,uid):
+    def image_insert(self,img,pid):
         """
         录入图片
         Parameters:
@@ -134,12 +138,3 @@ class ImageRocognition():
             print(traceback.format_exc())
             return 500, False, e.args
 
-
-if __name__ == '__main__':
-    model = ImageRocognition()
-    statusCode, isSuccess, msg, images, uids = model.ImgRearch("test.jpg")
-    print(statusCode,
-          isSuccess,
-          msg,
-          images,
-          uids)
