@@ -1,6 +1,7 @@
 package com.program.picture.service.Impl;
 
 
+import com.program.picture.common.result.HttpResult;
 import com.program.picture.common.result.ResultCodeEnum;
 import com.program.picture.domain.entity.User;
 import com.program.picture.domain.entity.UserDetails;
@@ -14,7 +15,6 @@ import com.program.picture.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,18 +33,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDetailsMapper userDetailsMapper;
 
-    @Autowired
-    private UserFollowMapper userFollowMapper;
 
-    @Autowired
-    private UserLikeTypeMapper userLikeTypeMapper;
+
 
     @Override
-    public ResultCodeEnum userRegister(String userName, String password) {
+    public HttpResult userRegister(String userName, String password) {
         List<User> users = userMapper.selectAll();
         for (User user : users) {
             if (user.getName().equals(userName)) {
-                return ResultCodeEnum.User_Exists_Exception;
+                return HttpResult.failure(ResultCodeEnum.User_Exists_Exception);
             }
         }
 
@@ -62,134 +59,74 @@ public class UserServiceImpl implements UserService {
                 .build();
         userDetailsMapper.insert(details);
 
-        return ResultCodeEnum.SUCCESS;
+        return HttpResult.success();
     }
 
     @Override
-    public ResultCodeEnum userLogin(String userName, String password) {
+    public HttpResult userLogin(String userName, String password) {
         List<User> users = userMapper.selectAll();
         for (User user : users) {
             if (user.getName().equals(userName)) {
                 if (user.getPassword().equals(password)) {
-                    return ResultCodeEnum.SUCCESS;
+                    return HttpResult.success();
                 } else {
-                    return ResultCodeEnum.User_Login_Fail;
+                    return HttpResult.failure(ResultCodeEnum.User_Login_Fail_Exception);
                 }
             }
         }
-        return ResultCodeEnum.User_Not_Exists_Exception;
+        return HttpResult.failure(ResultCodeEnum.User_Not_Exists_Exception);
     }
 
     @Override
-    public ResultCodeEnum userChangePassword(String userName, String oldPassword, String newPassword) {
+    public HttpResult userUpdatePassword(Integer userId, String oldPassword, String newPassword) {
+        User user = userMapper.selectByPrimaryKey(userId);
+        if (user.getPassword().equals(oldPassword)) {
+            user.setPassword(newPassword);
+            user.setUpdateTime(new Date());
+            userMapper.updateByPrimaryKey(user);
+            return HttpResult.success();
+        } else {
+            return HttpResult.failure(ResultCodeEnum.User_Update_Password_Fail_Exception);
+        }
+    }
+
+    @Override
+    public HttpResult userUpdateUserName(Integer userId, String userName) {
         List<User> users = userMapper.selectAll();
         for (User user : users) {
             if (user.getName().equals(userName)) {
-                if (user.getPassword().equals(oldPassword)) {
-                    user.setPassword(newPassword);
-                    user.setUpdateTime(new Date());
-                    userMapper.updateByPrimaryKey(user);
-                    return ResultCodeEnum.SUCCESS;
-                } else {
-                    return ResultCodeEnum.User_Change_Password_Fail;
-                }
+                return HttpResult.failure(ResultCodeEnum.User_Exists_Exception);
             }
         }
-        return ResultCodeEnum.User_Not_Exists_Exception;
+        User user = userMapper.selectByPrimaryKey(userId);
+        user.setName(userName);
+        user.setUpdateTime(new Date());
+        userMapper.updateByPrimaryKey(user);
+        return HttpResult.success();
     }
 
+
     @Override
-    public UserDetails userGetDetails(Integer userId) {
+    public HttpResult userSelectDetails(Integer userId) {
         List<UserDetails> userDetails = userDetailsMapper.selectAll();
         for (UserDetails userDetail : userDetails) {
             if (userDetail.getUserId().equals(userId)) {
-                return userDetail;
+                return HttpResult.success(userDetail);
             }
         }
-        return null;
+        return HttpResult.failure(ResultCodeEnum.User_Not_Exists_Exception);
     }
 
     @Override
-    public ResultCodeEnum userChangeDetails(UserDetails details) {
+    public HttpResult userUpdateDetails(UserDetails details) {
         details.setUpdateTime(new Date());
-        int success = userDetailsMapper.updateByPrimaryKey(details);
-        if (success == 0) return ResultCodeEnum.User_Not_Exists_Exception;
-        return ResultCodeEnum.SUCCESS;
-    }
-
-    @Override
-    public ResultCodeEnum userFollow(Integer userId, Integer followId) {
-
-        List<UserFollow> userFollows = userFollowMapper.selectAll();
-        for (UserFollow userFollow : userFollows) {
-            if (userFollow.getUserId().equals(userId) && userFollow.getFollowId().equals(followId)) {
-                return ResultCodeEnum.User_Follow_Fail;
-            }
+        if (userDetailsMapper.updateByPrimaryKey(details) == 0) {
+            return HttpResult.failure(ResultCodeEnum.User_Not_Exists_Exception);
         }
-
-        UserFollow userFollow = UserFollow.builder()
-                .userId(userId)
-                .followId(followId)
-                .createTime(new Date())
-                .updateTime(new Date())
-                .build();
-        userFollowMapper.insert(userFollow);
-        return ResultCodeEnum.SUCCESS;
+        return HttpResult.success();
     }
 
-    @Override
-    public ResultCodeEnum userFollowCancel(Integer userId, Integer followId) {
 
-        List<UserFollow> userFollows = userFollowMapper.selectAll();
-        for (UserFollow userFollow : userFollows) {
-            if (userFollow.getUserId().equals(userId) && userFollow.getFollowId().equals(followId)) {
-                userFollowMapper.deleteByPrimaryKey(userFollow.getId());
-                return ResultCodeEnum.SUCCESS;
-            }
-        }
-        return ResultCodeEnum.User_Follow_Cancel_Fail;
-    }
 
-    @Override
-    public ResultCodeEnum userAddLikeType(Integer userId, Integer typeId) {
-        List<UserLikeType> userLikeTypes = userLikeTypeMapper.selectAll();
-        for (UserLikeType userLikeType : userLikeTypes) {
-            if (userLikeType.getUserId().equals(userId) && userLikeType.getTypeId().equals(typeId)) {
-                return ResultCodeEnum.User_Add_Type_Fail;
-            }
-        }
-        UserLikeType userLikeType = UserLikeType.builder()
-                .userId(userId)
-                .typeId(typeId)
-                .createTime(new Date())
-                .updateTime(new Date())
-                .build();
-        userLikeTypeMapper.insert(userLikeType);
-        return ResultCodeEnum.SUCCESS;
-    }
-
-    @Override
-    public List<Integer> userGetLikeType(Integer userId) {
-        List<Integer> result = new ArrayList<>();
-        List<UserLikeType> userLikeTypes = userLikeTypeMapper.selectAll();
-        for (UserLikeType userLikeType : userLikeTypes) {
-            if (userLikeType.getUserId().equals(userId)) {
-                result.add(userLikeType.getTypeId());
-            }
-        }
-        return result;
-    }
-
-    @Override
-    public ResultCodeEnum userDeleteLikeType(Integer userId, Integer typeId) {
-        List<UserLikeType> userLikeTypes = userLikeTypeMapper.selectAll();
-        for (UserLikeType userLikeType : userLikeTypes) {
-            if (userLikeType.getUserId().equals(userId) && userLikeType.getTypeId().equals(typeId)) {
-                userLikeTypeMapper.deleteByPrimaryKey(userLikeType.getId());
-                return ResultCodeEnum.SUCCESS;
-            }
-        }
-        return ResultCodeEnum.User_Del_Type_Fail;
-    }
 
 }

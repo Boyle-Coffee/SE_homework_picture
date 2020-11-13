@@ -20,12 +20,12 @@ public enum ResultCodeEnum {
     // 1000～1999 区间表示用户模块错误
     User_Exists_Exception(10001, "用户已存在"),
     User_Not_Exists_Exception(10002, "用户不存在"),
-    User_Login_Fail(10003, "用户名或密码错误"),
-    User_Change_Password_Fail(10004, "旧密码错误"),
-    User_Follow_Fail(10005, "该用户已关注"),
-    User_Follow_Cancel_Fail(10006, "该用户还未关注"),
-    User_Add_Type_Fail(10007,"该图片标签已添加"),
-    User_Del_Type_Fail(10008,"该图片还未添加"),
+    User_Login_Fail_Exception(10003, "用户名或密码错误"),
+    User_Update_Password_Fail_Exception(10004, "旧密码错误"),
+    User_Follow_Fail_Exception(10005, "该用户已关注"),
+    User_Delete_Follow_Fail_Exception(10006, "该用户还未关注"),
+    User_Add_Type_Fail_Exception(10007,"该图片标签已添加"),
+    User_Del_Type_Fail_Exception(10008,"该图片还未添加"),
     // 2000～2999 区间表示图片模块错误
     Picture_Del_Fail_Exception(20001, "图片删除失败"),
     Picture_Add_Fail_Exception(20002, "图片添加失败"),
