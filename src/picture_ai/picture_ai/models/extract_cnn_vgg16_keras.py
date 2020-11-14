@@ -30,9 +30,9 @@ preprocess_input_func["DenseNet121"] = preprocess_input_densenet
 
 
 class VGGNet:
-    def __init__(self,recognition_model_type="VGG16",model_path = None,weight=None):
+    def __init__(self,recognition_model_type="VGG16",model_path = None,weights=None):
         self.input_shape = (224, 224, 3)
-        self.weight = weight  # 模型的权重
+        self.weights = weights  # 模型的权重
         self.model_path = model_path  # 训练模型的位置
         self.recogniton_model_type = recognition_model_type  # 模型类型
         self._load_model()
@@ -45,11 +45,12 @@ class VGGNet:
             self.model = \
                 load_model_func[
                     self.recogniton_model_type
-                ](weight=self.weight,
+                ](weights=self.weights,
                   input_shape = self.input_shape,
                   pooling = "max",
                   include_top=False
                   )
+            self.model.load_weights(self.model_path)
         else:
             raise ValueError("The pretrained model is wrong")
         try:
@@ -76,6 +77,6 @@ class VGGNet:
         else:
             raise ValueError("The pretrained model is wrong")
         feature = self.model.predict(image)
-        norm_feat = feature[0] / LA.norm(feat[0])
+        norm_feat = feature[0] / LA.norm(feature[0])
 
         return norm_feat
