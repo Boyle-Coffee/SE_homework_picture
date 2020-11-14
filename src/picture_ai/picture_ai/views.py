@@ -1,13 +1,15 @@
 # author:Boyle time:2020/11/6
 
 import json
+from django.shortcuts import render
 
 from .http_util import common_result, get_json, check_params
 from .image_db import image_orm
 from .image_reco import image_reco
+from .image_violate import image_nsfw
 
 def hello_world(request):
-    return common_result(200, True, None, "Hello world!")
+    return render(request, "API.html")
 
 
 def image_insert_view(request):
@@ -60,7 +62,7 @@ def image_search_view(request):
     url = post_json["url"]
     code, isSuccess, message, data = image_reco.image_search(url) # 搜索
 
-    return common_result(200, True, None, data)
+    return common_result(code, isSuccess, message, data)
 
 
 def image_recognition_view(request):
@@ -82,6 +84,9 @@ def image_recognition_view(request):
     isSuccess, message = check_params(require_params, json_params)  # 判断json参数是否正确
     if not isSuccess:
         return common_result(400, False, message, None)
-    data = "Hello world!" # TODO
 
-    return common_result(200, True, None, data)
+    url = post_json["url"]
+    code, isSuccess, message, data = image_nsfw.image_func(url) # 搜索
+
+    return common_result(code, isSuccess, message, data)
+

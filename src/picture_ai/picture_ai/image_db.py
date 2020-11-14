@@ -1,6 +1,6 @@
 # author:Boyle time:2020/11/12
 
-import numpy as np
+import traceback
 
 from PictureModel.models import Image_info
 from .data_util import *
@@ -23,6 +23,7 @@ class Image_db:
             image_data.save()
             return True
         except:
+            print(traceback.format_exc())
             return False
 
     def load_data(self):

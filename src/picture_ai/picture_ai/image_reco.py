@@ -2,17 +2,19 @@
 import numpy as np
 import traceback
 import cv2
+import os
 
 from .models.extract_cnn_vgg16_keras import VGGNet
 from .data_util import *
 from .image_db import image_orm
+from .image_util import image_imread
 
 
 """
 以图搜图功能
 """
 
-root_path = "picture_ai/models/pre_train/"
+weigh_path = "picture_ai/models/pre_train/"
 
 
 class ImageRocognition():
@@ -37,11 +39,11 @@ class ImageRocognition():
     def _load_reconition_model(self):
         # 加载人脸特征提取模型
         if self.net_type == "VGG16":
-            model_path = root_path + "vgg16_weights_tf_dim_ordering_tf_kernels_notop.h5"
+            model_path = os.path.join(weigh_path, "vgg16_weights_tf_dim_ordering_tf_kernels_notop.h5")
         elif self.net_type == "ResNet50":
-            model_path = root_path + "resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5"
+            model_path = os.path.join(weigh_path, "resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5")
         elif self.net_type == "DenseNet121":
-            model_path = root_path + "densenet121_weights_tf_dim_ordering_tf_kernels_notop.h5"
+            model_path = os.path.join(weigh_path, "densenet121_weights_tf_dim_ordering_tf_kernels_notop.h5")
         else:
             raise ValueError("The pretrained model is wrong")
         recognition_net = VGGNet(self.net_type, model_path=model_path)
@@ -55,8 +57,10 @@ class ImageRocognition():
         :return: common result
         """
         try:
-            image_bgr = cv2.imdecode(np.fromfile(url,dtype=np.uint8),-1)  # 获取图片
-            image_rgb = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2RGB)
+            image_rgb = image_imread(url)  # 获取图片
+            if image_rgb is None:
+               message = "error happen when read image"
+               return 400, False, message
             img_feat = self.net.extract_feat(image_rgb)  # 提取图片特征
             feature_str = np_to_str(img_feat)
             result = self.orm.insert_data(pid, feature_str)  # 存入数据库
@@ -76,13 +80,15 @@ class ImageRocognition():
         :return: <list> pids 相似图片id
         """
         try:
-            image_bgr = cv2.imdecode(np.fromfile(url, dtype=np.uint8), -1)  # 获取图片
-            image_rgb = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2RGB)
+            image_rgb = image_imread(url)  # 获取图片
+            if image_rgb is None:
+                message = "error happen when read image"
+                return 400, False, message, None
             img_feat = self.net.extract_feat(image_rgb)  # 提取图片特征
 
             db_pids, db_feat = self.orm.load_data() # 加载图片特征库
             scores = np.dot(img_feat, db_feat.T)
-            match_pids = np.array(db_pids)[scores>=self.score_threshold].tolist()
+            match_pids = np.array(db_pids)[scores>=self.score_threshold].tolist()[0]
 
             return 200, True, None, match_pids
         except Exception as e:
