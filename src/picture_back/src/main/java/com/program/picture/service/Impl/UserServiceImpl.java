@@ -5,17 +5,15 @@ import com.program.picture.common.result.HttpResult;
 import com.program.picture.common.result.ResultCodeEnum;
 import com.program.picture.domain.entity.User;
 import com.program.picture.domain.entity.UserDetails;
-import com.program.picture.domain.entity.UserFollow;
-import com.program.picture.domain.entity.UserLikeType;
 import com.program.picture.mapper.UserDetailsMapper;
-import com.program.picture.mapper.UserFollowMapper;
-import com.program.picture.mapper.UserLikeTypeMapper;
 import com.program.picture.mapper.UserMapper;
 import com.program.picture.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.List;
 
@@ -34,8 +32,6 @@ public class UserServiceImpl implements UserService {
     private UserDetailsMapper userDetailsMapper;
 
 
-
-
     @Override
     public HttpResult userRegister(String userName, String password) {
         List<User> users = userMapper.selectAll();
@@ -45,20 +41,26 @@ public class UserServiceImpl implements UserService {
             }
         }
 
-        User user = User.builder()
+        User newUser = User.builder()
                 .name(userName)
                 .password(password)
                 .createTime(new Date())
                 .updateTime(new Date())
                 .build();
-        userMapper.insert(user);
+        userMapper.insert(newUser);
 
-        UserDetails details = UserDetails.builder()
-                .createTime(new Date())
-                .updateTime(new Date())
-                .build();
-        userDetailsMapper.insert(details);
-
+        users = userMapper.selectAll();
+        for (User user : users) {
+            if (user.getName().equals(userName)) {
+                UserDetails details = UserDetails.builder()
+                        .userId(user.getId())
+                        .createTime(new Date())
+                        .updateTime(new Date())
+                        .build();
+                userDetailsMapper.insert(details);
+                break;
+            }
+        }
         return HttpResult.success();
     }
 
@@ -119,14 +121,32 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public HttpResult userUpdateDetails(UserDetails details) {
-        details.setUpdateTime(new Date());
-        if (userDetailsMapper.updateByPrimaryKey(details) == 0) {
-            return HttpResult.failure(ResultCodeEnum.User_Not_Exists_Exception);
+        UserDetails oldDetails = userDetailsMapper.selectByPrimaryKey(details.getId());
+        if (details.getAge() != null) {
+            oldDetails.setAge(details.getAge());
         }
+        if (details.getEmail() != null) {
+            oldDetails.setEmail(details.getEmail());
+        }
+        if (details.getGender() != null) {
+            oldDetails.setGender(details.getGender());
+        }
+        if (details.getConstellation() != null) {
+            oldDetails.setConstellation(details.getConstellation());
+        }
+        if (details.getEdu() != null) {
+            oldDetails.setEdu(details.getEdu());
+        }
+        if (details.getJob() != null) {
+            oldDetails.setJob(details.getJob());
+        }
+        if (details.getHobby() != null) {
+            oldDetails.setHobby(details.getHobby());
+        }
+        oldDetails.setUpdateTime(new Date());
+        userDetailsMapper.updateByPrimaryKey(oldDetails);
         return HttpResult.success();
     }
-
-
 
 
 }
