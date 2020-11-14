@@ -18,8 +18,8 @@ class PictureApplicationTests {
 
     @Test
     void sqlTest() {
-        Picture picture = new Picture();
-        picture.setUserId(1);
-        pictureService.insert(picture);
+//        Picture picture = new Picture();
+//        picture.setUserId(1);
+//        pictureService.insert(picture);
     }
 }

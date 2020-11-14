@@ -1,13 +1,7 @@
 package com.program.picture.domain.entity;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.experimental.Tolerate;
-
 import java.util.Date;
 
-@Data
-@Builder
 public class CommentPicture {
     private Integer id;
 
@@ -67,9 +61,5 @@ public class CommentPicture {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    @Tolerate
-    public CommentPicture() {
     }
 }

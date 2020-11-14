@@ -20,13 +20,13 @@ public class GenerationTests {
 
     @Test
     public void testMbg() throws Exception {
-        List<String> warnings = new ArrayList<String>();
-        boolean overwrite = true;
-        File configFile = new File("src/main/resources/generationConfig.xml");
-        ConfigurationParser cp = new ConfigurationParser(warnings);
-        Configuration config = cp.parseConfiguration(configFile);
-        DefaultShellCallback callback = new DefaultShellCallback(overwrite);
-        org.mybatis.generator.api.MyBatisGenerator myBatisGenerator = new org.mybatis.generator.api.MyBatisGenerator(config, callback, warnings);
-        myBatisGenerator.generate(null);
+//        List<String> warnings = new ArrayList<String>();
+//        boolean overwrite = true;
+//        File configFile = new File("src/main/resources/generationConfig.xml");
+//        ConfigurationParser cp = new ConfigurationParser(warnings);
+//        Configuration config = cp.parseConfiguration(configFile);
+//        DefaultShellCallback callback = new DefaultShellCallback(overwrite);
+//        org.mybatis.generator.api.MyBatisGenerator myBatisGenerator = new org.mybatis.generator.api.MyBatisGenerator(config, callback, warnings);
+//        myBatisGenerator.generate(null);
     }
 }

@@ -14,3 +14,6 @@ spring:
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
+swagger:
+  host: localhost:8080
+  show: true
