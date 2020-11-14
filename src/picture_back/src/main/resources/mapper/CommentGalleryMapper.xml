@@ -42,6 +42,6 @@
     <select id="selectByGalleryId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select id, user_id, gallery_id, content, create_time, update_time
     from comment_gallery
-    where gallery_id #{galleryIdjdbcType=INTEGER}
+    where gallery_id = #{galleryId,jdbcType=INTEGER}
   </select>
 </mapper>

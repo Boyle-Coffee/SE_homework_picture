@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
 
-import java.beans.Transient;
 import java.util.Date;
 
 @Data

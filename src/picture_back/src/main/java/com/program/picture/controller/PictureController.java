@@ -1,6 +1,7 @@
 package com.program.picture.controller;
 
 import com.program.picture.common.result.HttpResult;
+import com.program.picture.common.util.COSClientUtil;
 import com.program.picture.domain.entity.Picture;
 import com.program.picture.service.CollectionService;
 import com.program.picture.service.LikeService;
@@ -9,6 +10,9 @@ import com.program.picture.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.annotation.Resource;
 
 /**
  * @program: picture
@@ -23,7 +27,7 @@ public class PictureController {
      * todo
      *   图片的查找—根据以图搜图查看相似图片
      *   图片的添加(已初步完成)
-     *       图片的云端添加
+     *       图片的云端添加（已完成）
      *   图片的删除（已完成）
      *   图片的详情更新（已完成）
      *
@@ -44,6 +48,9 @@ public class PictureController {
      *
      * */
 
+    @Resource
+    private COSClientUtil cosClientUtil;
+
     @Autowired
     private LikeService likeService;
 
@@ -55,6 +62,11 @@ public class PictureController {
 
     @Autowired
     private CollectionService collectionService;
+
+    @PostMapping("/getPictureUrl")
+    public HttpResult getPictureUrl(@RequestParam(value = "file") MultipartFile file) {
+        return HttpResult.success(cosClientUtil.upload(file, "pictureWork/"));
+    }
 
     @PostMapping("/addPicture")
     public HttpResult addPicture(@RequestBody @Validated Picture picture) {
