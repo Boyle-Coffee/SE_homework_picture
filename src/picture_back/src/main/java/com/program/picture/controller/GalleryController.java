@@ -5,6 +5,8 @@ import com.program.picture.domain.entity.Gallery;
 import com.program.picture.service.CollectionService;
 import com.program.picture.service.GalleryService;
 import com.program.picture.service.LikeService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -15,28 +17,10 @@ import org.springframework.web.bind.annotation.*;
  * @author: Mr.Huang
  * @create: 2020-11-11 15:14
  **/
+@Api(tags = "图库接口")
 @RestController
 @RequestMapping("/gallery")
 public class GalleryController {
-    /*
-     * todo
-     *  图库的查找（已完成）
-     *  图库的添加（已完成）
-     *  图库的删除（已完成）
-     *  图库的更新（已完成）
-     *
-     * todo
-     *  添加图片进入图库（已完成）
-     *  删除图库中的图片（已完成）
-     *
-     * todo
-     *  添加图库收藏（已完成）
-     *  删除图库收藏（已完成）
-     *
-     * todo
-     *  添加图库喜欢（已完成）
-     *  删除图库喜欢（已完成）
-     * */
 
     @Autowired
     private LikeService likeService;
@@ -47,66 +31,78 @@ public class GalleryController {
     @Autowired
     private CollectionService collectionService;
 
+    @ApiOperation(value = "添加图库", notes = "新增图库")
     @PostMapping("/addGallery")
     public HttpResult addGallery(@RequestBody @Validated Gallery gallery) {
         return galleryService.insert(gallery);
     }
 
+    @ApiOperation(value = "获取图库", notes = "根据图库Id获取图库")
     @GetMapping("/getGallery")
     public HttpResult getGallery(@RequestParam(value = "galleyId") Integer galleyId) {
         return galleryService.selectByPrimaryKey(galleyId);
     }
 
+    @ApiOperation(value = "删除图库", notes = "根据图库Id删除图库")
     @DeleteMapping("/deleteGallery")
     public HttpResult deleteGallery(@RequestParam(value = "galleyId") Integer galleyId) {
         return galleryService.deleteByPrimaryKey(galleyId);
     }
 
+    @ApiOperation(value = "更新图库", notes = "更新图库信息")
     @PutMapping("/updateGallery")
     public HttpResult updateGallery(@RequestBody @Validated Gallery gallery) {
         return galleryService.updateByPrimaryKey(gallery);
     }
 
+    @ApiOperation(value = "删除喜欢图库", notes = "根据图库Id和用户Id删除喜欢图库")
     @DeleteMapping("/deleteGalleryLike")
     public HttpResult deleteGalleryLike(@RequestParam(value = "userId") Integer userId,
-                                        @RequestParam(value = "pictureId") Integer pictureId) {
-        return likeService.deleteGalleryLike(userId, pictureId);
+                                        @RequestParam(value = "galleyId") Integer galleyId) {
+        return likeService.deleteGalleryLike(userId, galleyId);
     }
 
+    @ApiOperation(value = "添加喜欢图库", notes = "根据图库Id和用户Id删除喜欢图库")
     @PostMapping("/addGalleryLike")
     public HttpResult addGalleryLike(@RequestParam(value = "userId") Integer userId,
-                                     @RequestParam(value = "pictureId") Integer pictureId) {
-        return likeService.addGalleryLike(userId, pictureId);
+                                     @RequestParam(value = "galleyId") Integer galleyId) {
+        return likeService.addGalleryLike(userId, galleyId);
     }
 
+    @ApiOperation(value = "获取喜欢图库", notes = "根据用户Id获取喜欢图库")
     @GetMapping("/getGalleryLike")
     public HttpResult selectGalleryLike(@RequestParam(value = "userId") Integer userId) {
         return likeService.selectGalleryLike(userId);
     }
 
+    @ApiOperation(value = "删除收藏图库", notes = "根据用户Id获取喜欢图库")
     @DeleteMapping("/deleteGalleryCollection")
     public HttpResult deleteGalleryCollection(@RequestParam(value = "userId") Integer userId,
-                                              @RequestParam(value = "pictureId") Integer pictureId) {
-        return collectionService.deleteGalleryCollection(userId, pictureId);
+                                              @RequestParam(value = "galleyId") Integer galleyId) {
+        return collectionService.deleteGalleryCollection(userId, galleyId);
     }
 
+    @ApiOperation(value = "添加收藏图库", notes = "根据用户Id和图库Id添加收藏图库")
     @PostMapping("/addGalleryCollection")
     public HttpResult addGalleryollection(@RequestParam(value = "userId") Integer userId,
-                                          @RequestParam(value = "pictureId") Integer pictureId) {
-        return collectionService.insertGalleryCollection(userId, pictureId);
+                                          @RequestParam(value = "galleyId") Integer galleyId) {
+        return collectionService.insertGalleryCollection(userId, galleyId);
     }
 
+    @ApiOperation(value = "获取收藏图库", notes = "根据用户Id获取收藏图库")
     @GetMapping("/getGalleryCollection")
     public HttpResult selectGalleryCollection(@RequestParam(value = "userId") Integer userId) {
         return collectionService.selectGalleryCollection(userId);
     }
 
+    @ApiOperation(value = "删除图库图片", notes = "根据图片Id和图库Id删除图库中的图片")
     @DeleteMapping("/deleteGalleryPicture")
     public HttpResult deleteGalleryPicture(@RequestParam(value = "galleryId") Integer galleryId,
                                            @RequestParam(value = "pictureId") Integer pictureId) {
         return galleryService.deleteGalleryPicture(galleryId, pictureId);
     }
 
+    @ApiOperation(value = "添加图库图片", notes = "根据图片Id和图库Id添加图库中的图片")
     @PostMapping("/addGalleryPicture")
     public HttpResult addGalleryPicture(@RequestParam(value = "galleryId") Integer galleryId,
                                         @RequestParam(value = "pictureId") Integer pictureId) {
