@@ -1,5 +1,8 @@
 package com.program.picture.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
@@ -8,19 +11,30 @@ import java.util.Date;
 
 @Data
 @Builder
+@ApiModel(value = "Picture", description = "图片类")
 public class Picture {
+
+    @ApiModelProperty(value = "图片id", example = "1")
     private Integer id;
 
+    @ApiModelProperty(value = "用户id", example = "1")
     private Integer userId;
 
+    @ApiModelProperty(value = "图片名称", example = "广工宿舍")
     private String name;
 
+    @ApiModelProperty(value = "是否公开", example = "1为公开，0为不公开")
     private Integer open;
 
+    @ApiModelProperty(value = "图片地址", example = "https://hyyyms-1301925880.cos.ap-guangzhou.myqcloud.com/pictureWork/13591605325285287.jpg")
     private String path;
 
+    @ApiModelProperty(hidden = true)
+    @JsonIgnore
     private Date createTime;
 
+    @ApiModelProperty(hidden = true)
+    @JsonIgnore
     private Date updateTime;
 
     public Integer getId() {

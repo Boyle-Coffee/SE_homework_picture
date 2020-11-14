@@ -1,19 +1,31 @@
 package com.program.picture.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 
 import java.util.Date;
 
 @Builder
+@ApiModel(value = "UserFollow", description = "用户关注类")
 public class UserFollow {
+
+    @ApiModelProperty(value = "用户关注id", example = "1")
     private Integer id;
 
+    @ApiModelProperty(value = "用户id", example = "1")
     private Integer userId;
 
+    @ApiModelProperty(value = "关注用户id", example = "1")
     private Integer followId;
 
+    @ApiModelProperty(hidden = true)
+    @JsonIgnore
     private Date createTime;
 
+    @ApiModelProperty(hidden = true)
+    @JsonIgnore
     private Date updateTime;
 
     public Integer getId() {

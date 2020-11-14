@@ -99,8 +99,7 @@ public class CollectionServiceImpl implements CollectionService {
         }
         return HttpResult.success();
     }
-
-
+    
     @Override
     public HttpResult deleteGalleryCollection(Integer userId, Integer galleryId) {
         int delete = 1;

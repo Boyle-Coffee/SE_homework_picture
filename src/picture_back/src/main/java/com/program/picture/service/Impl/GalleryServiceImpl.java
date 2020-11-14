@@ -1,6 +1,7 @@
 package com.program.picture.service.Impl;
 
 import com.program.picture.common.exception.gallery.*;
+import com.program.picture.common.exception.picture.PictureSelectFailException;
 import com.program.picture.common.result.HttpResult;
 import com.program.picture.domain.entity.Gallery;
 import com.program.picture.domain.entity.GalleryPicture;

@@ -1,18 +1,34 @@
 package com.program.picture.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.format.annotation.DateTimeFormat;
+import springfox.documentation.annotations.ApiIgnore;
+
 import java.util.Date;
 
+@ApiModel(value = "CommentGallery", description = "图库评论类")
 public class CommentGallery {
+
+    @ApiModelProperty(value = "图库评论id", example = "1")
     private Integer id;
 
+    @ApiModelProperty(value = "用户id", example = "1")
     private Integer userId;
 
+    @ApiModelProperty(value = "图库id", example = "1")
     private Integer galleryId;
 
+    @ApiModelProperty(value = "评论内容", example = "这图库真漂亮")
     private String content;
 
+    @ApiModelProperty(hidden = true)
+    @JsonIgnore
     private Date createTime;
 
+    @ApiModelProperty(hidden = true)
+    @JsonIgnore
     private Date updateTime;
 
     public Integer getId() {
