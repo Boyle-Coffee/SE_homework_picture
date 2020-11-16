@@ -35,7 +35,7 @@ spring:
         url-pattern: /druid/*
         # 登录用户名/密码
         login-username: root
-        login-password: a570911275
+        login-password: Mysql
 mybatis:
   mapper-locations: classpath*:/mapper/*.xml
   type-aliases-package: com.program.picture.domain.entity

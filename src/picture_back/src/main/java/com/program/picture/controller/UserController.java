@@ -8,7 +8,6 @@ import com.program.picture.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -67,7 +66,7 @@ public class UserController {
     @ApiOperation(value = "更新用户信息", notes = "更新用户信息")
     @PutMapping("/udateDetails")
     public HttpResult userUpdateDetails(
-            @RequestBody @Validated UserDetails details) {
+            @RequestParam(value = "userId") UserDetails details) {
         return userService.userUpdateDetails(details);
     }
 
@@ -119,7 +118,7 @@ public class UserController {
     @DeleteMapping("/deleteLikeType")
     public HttpResult deleteLikeType(
             @RequestParam(value = "userId") Integer userId
-            , @RequestParam(value = "typeId") Integer typeId) {
+            , @RequestParam(value = "followId") Integer typeId) {
         return likeTypeService.DeleteLikeType(userId, typeId);
     }
 
