@@ -38,6 +38,13 @@ public class UserController {
         return userService.userLogin(userName, password);
     }
 
+    @ApiOperation(value = "获取用户Id", notes = "根据用户名称获取Id")
+    @GetMapping("/getIdByName")
+    public HttpResult userGetIdByName(
+            @RequestParam(value = "userName") String userName) {
+        return userService.userGetIdByName(userName);
+    }
+
     @ApiOperation(value = "用户注册", notes = "根据用户名称以及用户密码进行注册")
     @PostMapping("/register")
     public HttpResult userRegister(

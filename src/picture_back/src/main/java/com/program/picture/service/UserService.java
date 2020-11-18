@@ -16,6 +16,8 @@ public interface UserService {
 
     HttpResult userLogin(String userName,String password);
 
+    HttpResult userGetIdByName(String userName);
+
     HttpResult userUpdatePassword(Integer userId, String oldPassword, String newPassword);
 
     HttpResult userUpdateUserName(Integer userId, String userName);

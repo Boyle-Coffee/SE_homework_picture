@@ -67,10 +67,21 @@ public class UserServiceImpl implements UserService {
         for (User user : users) {
             if (user.getName().equals(userName)) {
                 if (user.getPassword().equals(password)) {
-                    return HttpResult.success();
+                    return HttpResult.success(user.getId());
                 } else {
                     return HttpResult.failure(ResultCodeEnum.User_Login_Fail_Exception);
                 }
+            }
+        }
+        return HttpResult.failure(ResultCodeEnum.User_Not_Exists_Exception);
+    }
+
+    @Override
+    public HttpResult userGetIdByName(String userName) {
+        List<User> users = userMapper.selectAll();
+        for (User user : users) {
+            if (user.getName().equals(userName)) {
+                return HttpResult.success(user.getId());
             }
         }
         return HttpResult.failure(ResultCodeEnum.User_Not_Exists_Exception);
