@@ -8,6 +8,7 @@ import com.program.picture.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -73,7 +74,7 @@ public class UserController {
     @ApiOperation(value = "更新用户信息", notes = "更新用户信息")
     @PutMapping("/udateDetails")
     public HttpResult userUpdateDetails(
-            @RequestParam(value = "userId") UserDetails details) {
+            @RequestBody @Validated UserDetails details) {
         return userService.userUpdateDetails(details);
     }
 
