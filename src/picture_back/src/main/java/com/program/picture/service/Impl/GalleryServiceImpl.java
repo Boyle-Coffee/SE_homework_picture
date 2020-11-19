@@ -97,5 +97,14 @@ public class GalleryServiceImpl implements GalleryService {
         return HttpResult.success();
     }
 
+    @Override
+    public HttpResult selectGalleryByUserId(Integer userId) {
+        List<Gallery> galleryList = galleryMapper.selectByUserId(userId);
+        if (galleryList == null || galleryList.size() == 0) {
+            return HttpResult.success("该用户无图库");
+        }
+        return HttpResult.success(galleryList);
+    }
+
 
 }

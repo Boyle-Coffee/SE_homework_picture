@@ -83,7 +83,7 @@ public class UserController {
         return userService.userSelectDetails(userId);
     }
 
-    @ApiOperation(value = "获取用户信息", notes = "根据用户Id获取用户信息")
+    @ApiOperation(value = "添加用户关注", notes = "根据用户Id以及关注用户id添加用户关注")
     @PostMapping("/addFollow")
     public HttpResult addFollow(
             @RequestParam(value = "userId") Integer userId

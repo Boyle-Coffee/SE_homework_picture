@@ -6,13 +6,16 @@ import com.program.picture.common.exception.picture.PictureSelectFailException;
 import com.program.picture.common.exception.picture.PictureUpdateFailException;
 import com.program.picture.common.result.HttpResult;
 import com.program.picture.domain.entity.Picture;
+import com.program.picture.domain.entity.PictureType;
 import com.program.picture.mapper.PictureMapper;
+import com.program.picture.mapper.PictureTypeMapper;
 import com.program.picture.service.PictureService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +32,9 @@ public class PictureServiceImpl implements PictureService {
 
     @Autowired
     private PictureMapper pictureMapper;
+
+    @Autowired
+    private PictureTypeMapper pictureTypeMapper;
 
     @Override
     public HttpResult deleteByPrimaryKey(Integer id) {
@@ -76,5 +82,27 @@ public class PictureServiceImpl implements PictureService {
         }
         logger.info("更新图片" + record);
         return HttpResult.success();
+    }
+
+    @Override
+    public HttpResult selectPictureByType(Integer typeId) {
+        List<PictureType> pictureTypeList = pictureTypeMapper.selectByTypeId(typeId);
+        List<Picture> pictureList = new ArrayList<>();
+        if (pictureTypeList == null || pictureTypeList.size() == 0) {
+            return HttpResult.success("该标签无图片添加");
+        }
+        for (PictureType pictureType : pictureTypeList) {
+            pictureList.add(pictureMapper.selectByPrimaryKey(pictureType.getPictureId()));
+        }
+        return HttpResult.success(pictureList);
+    }
+
+    @Override
+    public HttpResult selectPictureByUserId(Integer userId) {
+        List<Picture> pictureList = pictureMapper.selectByUserId(userId);
+        if (pictureList == null || pictureList.size() == 0) {
+            return HttpResult.success("该用户无添加图片");
+        }
+        return HttpResult.success(pictureList);
     }
 }

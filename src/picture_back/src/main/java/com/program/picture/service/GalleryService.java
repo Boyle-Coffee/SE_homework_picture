@@ -18,4 +18,6 @@ public interface GalleryService {
     HttpResult insertGalleryPicture(Integer galleryId, Integer pictureId);
 
     HttpResult deleteGalleryPicture(Integer galleryId, Integer pictureId);
+
+    HttpResult selectGalleryByUserId(Integer userId);
 }

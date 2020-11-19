@@ -8,6 +8,7 @@ import com.program.picture.service.LikeService;
 import com.program.picture.service.PictureService;
 import com.program.picture.service.TypeService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -136,4 +137,21 @@ public class PictureController {
         return likeService.selectPictureLike(userId);
     }
 
+    @ApiOperation(value = "获取所有图片", notes = "获取所有公开图片")
+    @GetMapping("/getAllPicture")
+    public HttpResult selectAllPicture() {
+        return pictureService.selectAll();
+    }
+
+    @ApiOperation(value = "获取标签类图片", notes = "根据标签id获取该标签类图片")
+    @GetMapping("/getTypePicture")
+    public HttpResult selectTypePicture(@RequestParam(value = "typeId") Integer typeId) {
+        return pictureService.selectPictureByType(typeId);
+    }
+
+    @ApiOperation(value = "获取用户图片", notes = "根据用户id获取该用户图片")
+    @GetMapping("/getUserPicture")
+    public HttpResult selectUserPicture(@RequestParam(value = "userId") Integer userId) {
+        return pictureService.selectPictureByUserId(userId);
+    }
 }

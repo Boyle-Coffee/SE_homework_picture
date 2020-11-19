@@ -22,4 +22,8 @@ public interface PictureService {
     HttpResult selectAll();
 
     HttpResult updateByPrimaryKey(Picture record);
+
+    HttpResult selectPictureByType(Integer typeId);
+
+    HttpResult selectPictureByUserId(Integer userId);
 }

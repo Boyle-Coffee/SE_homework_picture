@@ -9,6 +9,7 @@ import com.program.picture.domain.entity.Type;
 import com.program.picture.mapper.PictureTypeMapper;
 import com.program.picture.mapper.TypeMapper;
 import com.program.picture.service.TypeService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
