@@ -129,7 +129,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public HttpResult userUpdateDetails(UserDetails details) {
-        UserDetails oldDetails = userDetailsMapper.selectByPrimaryKey(details.getId());
+        UserDetails oldDetails = userDetailsMapper.selectByPrimaryKey(details.getUserId());
         if (details.getAge() != null) {
             oldDetails.setAge(details.getAge());
         }
@@ -142,8 +142,8 @@ public class UserServiceImpl implements UserService {
         if (details.getConstellation() != null) {
             oldDetails.setConstellation(details.getConstellation());
         }
-        if (details.getEdu() != null) {
-            oldDetails.setEdu(details.getEdu());
+        if (details.getBirthday() != null) {
+            oldDetails.setBirthday(details.getBirthday());
         }
         if (details.getJob() != null) {
             oldDetails.setJob(details.getJob());
@@ -155,6 +155,4 @@ public class UserServiceImpl implements UserService {
         userDetailsMapper.updateByPrimaryKey(oldDetails);
         return HttpResult.success();
     }
-
-
 }
