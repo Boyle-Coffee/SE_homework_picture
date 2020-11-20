@@ -115,21 +115,17 @@ public class UserServiceImpl implements UserService {
         return HttpResult.success();
     }
 
-
     @Override
     public HttpResult userSelectDetails(Integer userId) {
-        List<UserDetails> userDetails = userDetailsMapper.selectAll();
-        for (UserDetails userDetail : userDetails) {
-            if (userDetail.getUserId().equals(userId)) {
-                return HttpResult.success(userDetail);
-            }
-        }
+        UserDetails details = userDetailsMapper.selectByPrimaryKey(userId);
+        if(details!=null) return HttpResult.success(details);
         return HttpResult.failure(ResultCodeEnum.User_Not_Exists_Exception);
     }
 
     @Override
     public HttpResult userUpdateDetails(UserDetails details) {
         UserDetails oldDetails = userDetailsMapper.selectByPrimaryKey(details.getUserId());
+        if(oldDetails == null) return HttpResult.failure(ResultCodeEnum.User_Not_Exists_Exception);
         if (details.getAge() != null) {
             oldDetails.setAge(details.getAge());
         }
@@ -150,6 +146,9 @@ public class UserServiceImpl implements UserService {
         }
         if (details.getHobby() != null) {
             oldDetails.setHobby(details.getHobby());
+        }
+        if (details.getBirthday() != null) {
+            oldDetails.setBirthday(details.getBirthday());
         }
         oldDetails.setUpdateTime(new Date());
         userDetailsMapper.updateByPrimaryKey(oldDetails);

@@ -72,7 +72,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "更新用户信息", notes = "更新用户信息")
-    @PutMapping("/udateDetails")
+    @PutMapping("/updateDetails")
     public HttpResult userUpdateDetails(
             @RequestBody @Validated UserDetails details) {
         return userService.userUpdateDetails(details);
