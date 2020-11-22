@@ -24,5 +24,5 @@ public interface PictureMapper {
 
     Picture selectByPictureUrl(String path);
 
-    List<Picture> selectByName(String name);
+    List<Picture> selectByName(String content);
 }

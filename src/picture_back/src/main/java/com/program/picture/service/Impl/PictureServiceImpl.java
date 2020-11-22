@@ -51,6 +51,17 @@ public class PictureServiceImpl implements PictureService {
         if (pictureMapper.deleteByPrimaryKey(id) == 0) {
             throw new PictureDelFailException("图片删除失败");
         }
+        JSONObject jsonParamDelete = new JSONObject();
+        jsonParamDelete.put("pid", id + "");
+        String paramDelete = jsonParamDelete.toJSONString();
+        String resultDelete =
+                HttpRequestUtil.sendPost("http://120.79.50.99:8100/imageDelete",
+                        paramDelete);
+        JSONObject resultDeleteJson = JSONObject.parseObject(resultDelete);
+        boolean delete = (boolean) resultDeleteJson.get("isSuccess");
+        if (!delete) {
+            throw new PictureDelFailException("图片删除失败");
+        }
         logger.info("删除图片" + id);
         return HttpResult.success();
     }
