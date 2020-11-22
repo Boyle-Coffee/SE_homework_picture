@@ -1,5 +1,6 @@
 package com.program.picture;
 
+import com.program.picture.common.util.COSClientUtil;
 import com.program.picture.domain.entity.Picture;
 import com.program.picture.service.PictureService;
 import org.junit.jupiter.api.Test;
@@ -22,4 +23,13 @@ class PictureApplicationTests {
 //        picture.setUserId(1);
 //        pictureService.insert(picture);
     }
+
+    @Test
+    void cosDelTest(){
+        COSClientUtil cosClientUtil = new COSClientUtil();
+        cosClientUtil.deleteFile("hyyyms-1301925880",
+                "https://hyyyms-1301925880.cos.ap-guangzhou.myqcloud.com/pictureWork/13591605325285287.jpg");
+
+    }
+
 }

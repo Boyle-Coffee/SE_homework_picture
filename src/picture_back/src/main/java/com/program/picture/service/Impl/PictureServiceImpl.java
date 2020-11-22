@@ -11,6 +11,7 @@ import com.program.picture.domain.entity.PictureType;
 import com.program.picture.mapper.PictureMapper;
 import com.program.picture.mapper.PictureTypeMapper;
 import com.program.picture.service.PictureService;
+import io.swagger.models.auth.In;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -94,10 +96,13 @@ public class PictureServiceImpl implements PictureService {
     }
 
     @Override
-    public HttpResult selectAll() {
+    public HttpResult selectAll(Integer isAsc) {
         List<Picture> pictureList = pictureMapper.selectAll();
         if (pictureList == null || pictureList.size() == 0) {
             throw new PictureSelectFailException("图片查找失败");
+        }
+        if (isAsc != 1) {
+            Collections.reverse(pictureList);
         }
         logger.info("查找图片" + pictureList);
         return HttpResult.success(pictureList);
@@ -144,12 +149,12 @@ public class PictureServiceImpl implements PictureService {
                         paramSimilar);
         JSONObject resultSimilarJson = JSONObject.parseObject(resultSimilar);
         String[] dataArray = (String[]) resultSimilarJson.get("data");
+        if (dataArray == null || dataArray.length == 0) {
+            return HttpResult.success("该图片无相似图片");
+        }
         int[] dataIntArray = new int[dataArray.length];
         for (int i = 0; i < dataArray.length; i++) {
             dataIntArray[i] = Integer.parseInt(dataArray[i]);
-        }
-        if (dataIntArray.length == 0) {
-            return HttpResult.success("该图片无相似图片");
         }
         return HttpResult.success(dataIntArray);
     }

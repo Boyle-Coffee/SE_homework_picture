@@ -19,7 +19,7 @@ public interface PictureService {
 
     HttpResult selectByPrimaryKey(Integer id);
 
-    HttpResult selectAll();
+    HttpResult selectAll(Integer isAsc);
 
     HttpResult updateByPrimaryKey(Picture record);
 

@@ -133,12 +133,6 @@ public class PictureController {
         return likeService.selectPictureLike(userId);
     }
 
-    @ApiOperation(value = "获取所有图片", notes = "获取所有公开图片")
-    @GetMapping("/getAllPicture")
-    public HttpResult selectAllPicture() {
-        return pictureService.selectAll();
-    }
-
     @ApiOperation(value = "获取标签类图片", notes = "根据标签id获取该标签类图片")
     @GetMapping("/getTypePicture")
     public HttpResult selectTypePicture(@RequestParam(value = "typeId") Integer typeId) {
@@ -152,8 +146,14 @@ public class PictureController {
     }
 
     @ApiOperation(value = "获取相似图片", notes = "根据图片url获取该图片的相似图片")
-    @PostMapping("/similarPicture")
-    public HttpResult selectSimilarPicture(@RequestParam(value = "pictureUrl") String pictureUrl){
+    @PostMapping("/getSimilarPicture")
+    public HttpResult selectSimilarPicture(@RequestParam(value = "pictureUrl") String pictureUrl) {
         return pictureService.selectSimilarPicture(pictureUrl);
+    }
+
+    @ApiOperation(value = "获取所有图片", notes = "根据时间进行排序获取所有公开图片(1为升序，0为降序)")
+    @PostMapping("/getAllPictureOrderTime")
+    public HttpResult sleectAllPictureOrderTime(@RequestParam(value = "isAsc") Integer isAsc) {
+        return pictureService.selectAll(isAsc);
     }
 }
