@@ -1,23 +1,23 @@
 package com.program.picture.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
+import lombok.Data;
+import lombok.experimental.Tolerate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+@Data
 @Builder
-@ApiModel(value = "UserDetails", description = "用户信息类")
 public class UserDetails {
-
-    @ApiModelProperty(value = "用户信息id", example = "1")
-    private Integer id;
 
     @ApiModelProperty(value = "用户id", example = "1")
     private Integer userId;
 
-    @ApiModelProperty(value = "邮箱", example = "123456789@qq.com")
+    @ApiModelProperty(value = "邮箱", example = "570911275@qq.com")
     private String email;
 
     @ApiModelProperty(value = "年龄", example = "18")
@@ -29,14 +29,16 @@ public class UserDetails {
     @ApiModelProperty(value = "星座", example = "双鱼座")
     private String constellation;
 
-    @ApiModelProperty(value = "教育程度", example = "本科")
-    private String edu;
-
     @ApiModelProperty(value = "工作", example = "码农")
     private String job;
 
-    @ApiModelProperty(value = "爱好", example = "睡觉")
+    @ApiModelProperty(value = "兴趣", example = "睡觉")
     private String hobby;
+
+    @ApiModelProperty(value = "出生日期", example = "2000-04-25 17:28")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    private Date birthday;
 
     @ApiModelProperty(hidden = true)
     @JsonIgnore
@@ -45,14 +47,6 @@ public class UserDetails {
     @ApiModelProperty(hidden = true)
     @JsonIgnore
     private Date updateTime;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Integer getUserId() {
         return userId;
@@ -94,14 +88,6 @@ public class UserDetails {
         this.constellation = constellation == null ? null : constellation.trim();
     }
 
-    public String getEdu() {
-        return edu;
-    }
-
-    public void setEdu(String edu) {
-        this.edu = edu == null ? null : edu.trim();
-    }
-
     public String getJob() {
         return job;
     }
@@ -118,6 +104,14 @@ public class UserDetails {
         this.hobby = hobby == null ? null : hobby.trim();
     }
 
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -132,5 +126,9 @@ public class UserDetails {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Tolerate
+    public UserDetails() {
     }
 }

@@ -11,9 +11,6 @@ import com.program.picture.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.List;
 
@@ -70,10 +67,21 @@ public class UserServiceImpl implements UserService {
         for (User user : users) {
             if (user.getName().equals(userName)) {
                 if (user.getPassword().equals(password)) {
-                    return HttpResult.success();
+                    return HttpResult.success(user.getId());
                 } else {
                     return HttpResult.failure(ResultCodeEnum.User_Login_Fail_Exception);
                 }
+            }
+        }
+        return HttpResult.failure(ResultCodeEnum.User_Not_Exists_Exception);
+    }
+
+    @Override
+    public HttpResult userGetIdByName(String userName) {
+        List<User> users = userMapper.selectAll();
+        for (User user : users) {
+            if (user.getName().equals(userName)) {
+                return HttpResult.success(user.getId());
             }
         }
         return HttpResult.failure(ResultCodeEnum.User_Not_Exists_Exception);
@@ -107,21 +115,17 @@ public class UserServiceImpl implements UserService {
         return HttpResult.success();
     }
 
-
     @Override
     public HttpResult userSelectDetails(Integer userId) {
-        List<UserDetails> userDetails = userDetailsMapper.selectAll();
-        for (UserDetails userDetail : userDetails) {
-            if (userDetail.getUserId().equals(userId)) {
-                return HttpResult.success(userDetail);
-            }
-        }
+        UserDetails details = userDetailsMapper.selectByPrimaryKey(userId);
+        if(details!=null) return HttpResult.success(details);
         return HttpResult.failure(ResultCodeEnum.User_Not_Exists_Exception);
     }
 
     @Override
     public HttpResult userUpdateDetails(UserDetails details) {
-        UserDetails oldDetails = userDetailsMapper.selectByPrimaryKey(details.getId());
+        UserDetails oldDetails = userDetailsMapper.selectByPrimaryKey(details.getUserId());
+        if(oldDetails == null) return HttpResult.failure(ResultCodeEnum.User_Not_Exists_Exception);
         if (details.getAge() != null) {
             oldDetails.setAge(details.getAge());
         }
@@ -134,8 +138,8 @@ public class UserServiceImpl implements UserService {
         if (details.getConstellation() != null) {
             oldDetails.setConstellation(details.getConstellation());
         }
-        if (details.getEdu() != null) {
-            oldDetails.setEdu(details.getEdu());
+        if (details.getBirthday() != null) {
+            oldDetails.setBirthday(details.getBirthday());
         }
         if (details.getJob() != null) {
             oldDetails.setJob(details.getJob());
@@ -143,10 +147,11 @@ public class UserServiceImpl implements UserService {
         if (details.getHobby() != null) {
             oldDetails.setHobby(details.getHobby());
         }
+        if (details.getBirthday() != null) {
+            oldDetails.setBirthday(details.getBirthday());
+        }
         oldDetails.setUpdateTime(new Date());
         userDetailsMapper.updateByPrimaryKey(oldDetails);
         return HttpResult.success();
     }
-
-
 }

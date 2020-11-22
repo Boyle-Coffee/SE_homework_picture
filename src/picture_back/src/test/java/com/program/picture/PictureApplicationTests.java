@@ -1,5 +1,6 @@
 package com.program.picture;
 
+import com.program.picture.common.util.COSClientUtil;
 import com.program.picture.domain.entity.Picture;
 import com.program.picture.service.PictureService;
 import org.junit.jupiter.api.Test;
@@ -22,4 +23,7 @@ class PictureApplicationTests {
 //        picture.setUserId(1);
 //        pictureService.insert(picture);
     }
+
+
+
 }

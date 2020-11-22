@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev
+    active: prod
   # datasource配置
   datasource:
     # 扩展插件

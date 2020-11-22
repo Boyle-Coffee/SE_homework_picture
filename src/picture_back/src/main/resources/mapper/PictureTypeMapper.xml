@@ -40,4 +40,9 @@
     from picture_type
     where picture_id = #{pictureId,jdbcType=INTEGER}
   </select>
+    <select id="selectByTypeId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, picture_id, type_id, create_time, update_time
+    from picture_type
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </select>
 </mapper>

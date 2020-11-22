@@ -9,11 +9,11 @@ import java.util.List;
 @Mapper
 @Repository
 public interface UserDetailsMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer userId);
 
     int insert(UserDetails record);
 
-    UserDetails selectByPrimaryKey(Integer id);
+    UserDetails selectByPrimaryKey(Integer userId);
 
     List<UserDetails> selectAll();
 

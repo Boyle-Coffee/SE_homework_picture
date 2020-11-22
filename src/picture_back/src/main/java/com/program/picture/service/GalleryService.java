@@ -5,7 +5,7 @@ import com.program.picture.domain.entity.Gallery;
 
 public interface GalleryService {
 
-    HttpResult deleteByPrimaryKey(Integer id);
+    HttpResult deleteByPrimaryKey(Integer id, Integer userId);
 
     HttpResult insert(Gallery record);
 
@@ -17,5 +17,7 @@ public interface GalleryService {
 
     HttpResult insertGalleryPicture(Integer galleryId, Integer pictureId);
 
-    HttpResult deleteGalleryPicture(Integer galleryId, Integer pictureId);
+    HttpResult deleteGalleryPicture(Integer galleryId, Integer pictureId,Integer userId);
+
+    HttpResult selectGalleryByUserId(Integer userId);
 }

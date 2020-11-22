@@ -20,4 +20,6 @@ public interface PictureTypeMapper {
     int updateByPrimaryKey(PictureType record);
 
     List<PictureType> selectByPictureId(Integer picictureId);
+
+    List<PictureType> selectByTypeId(Integer typeId);
 }

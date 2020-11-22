@@ -40,5 +40,21 @@
     <select id="selectAll" resultMap="BaseResultMap">
     select id, user_id, name, open, path, create_time, update_time
     from picture
+    where open = 1;
+  </select>
+    <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, user_id, name, open, path, create_time, update_time
+    from picture
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+    <select id="selectByPictureUrl" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, user_id, name, open, path, create_time, update_time
+    from picture
+    where path = #{path,jdbcType=INTEGER}
+  </select>
+    <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, user_id, name, open, path, create_time, update_time
+    from picture
+    where name like concat('%',#{content,jdbcType=VARCHAR},'%')
   </select>
 </mapper>

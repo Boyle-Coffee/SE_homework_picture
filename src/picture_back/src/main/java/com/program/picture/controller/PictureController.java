@@ -8,6 +8,7 @@ import com.program.picture.service.LikeService;
 import com.program.picture.service.PictureService;
 import com.program.picture.service.TypeService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -26,10 +27,6 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/picture")
 public class PictureController {
-    /*
-     * todo
-     *   图片的查找—根据以图搜图查看相似图片
-     */
 
     @Resource
     private COSClientUtil cosClientUtil;
@@ -60,8 +57,9 @@ public class PictureController {
 
     @ApiOperation(value = "删除图片", notes = "根据图片Id删除图片")
     @DeleteMapping("/deletePicture")
-    public HttpResult deletePicture(@RequestParam(value = "pictureId") Integer pictureId) {
-        return pictureService.deleteByPrimaryKey(pictureId);
+    public HttpResult deletePicture(@RequestParam(value = "pictureId") Integer pictureId,
+                                    @RequestParam(value = "userId") Integer userId) {
+        return pictureService.deleteByPrimaryKey(pictureId, userId);
     }
 
     @ApiOperation(value = "更新图片", notes = "更新图片信息")
@@ -136,4 +134,33 @@ public class PictureController {
         return likeService.selectPictureLike(userId);
     }
 
+    @ApiOperation(value = "获取标签类图片", notes = "根据标签id获取该标签类图片")
+    @GetMapping("/getTypePicture")
+    public HttpResult selectTypePicture(@RequestParam(value = "typeId") Integer typeId) {
+        return pictureService.selectPictureByType(typeId);
+    }
+
+    @ApiOperation(value = "获取用户图片", notes = "根据用户id获取该用户图片")
+    @GetMapping("/getUserPicture")
+    public HttpResult selectUserPicture(@RequestParam(value = "userId") Integer userId) {
+        return pictureService.selectPictureByUserId(userId);
+    }
+
+    @ApiOperation(value = "获取相似图片", notes = "根据图片url获取该图片的相似图片")
+    @GetMapping("/getSimilarPicture")
+    public HttpResult selectSimilarPicture(@RequestParam(value = "pictureUrl") String pictureUrl) {
+        return pictureService.selectSimilarPicture(pictureUrl);
+    }
+
+    @ApiOperation(value = "获取所有图片", notes = "根据时间进行排序获取所有公开图片(1为升序，0为降序)")
+    @GetMapping("/getAllPictureOrderTime")
+    public HttpResult selectAllPictureOrderTime(@RequestParam(value = "isAsc") Integer isAsc) {
+        return pictureService.selectAll(isAsc);
+    }
+
+    @ApiOperation(value = "获取相关图片", notes = "根据输入内容查找相关图片")
+    @GetMapping("/getPictureByContent")
+    public HttpResult selectPictureByContent(@RequestParam(value = "content") String content) {
+        return pictureService.selectByContent(content);
+    }
 }

@@ -29,7 +29,10 @@ public class GalleryServiceImpl implements GalleryService {
     private GalleryPictureMapper galleryPictureMapper;
 
     @Override
-    public HttpResult deleteByPrimaryKey(Integer id) {
+    public HttpResult deleteByPrimaryKey(Integer id, Integer userId) {
+        if (!galleryMapper.selectByPrimaryKey(id).getUserId().equals(userId)) {
+            throw new GalleryDelFailException("图库删除失败——该用户无权限删除该图库");
+        }
         if (galleryMapper.deleteByPrimaryKey(id) == 0) {
             throw new GalleryDelFailException("图库删除失败");
         }
@@ -83,7 +86,10 @@ public class GalleryServiceImpl implements GalleryService {
     }
 
     @Override
-    public HttpResult deleteGalleryPicture(Integer galleryId, Integer pictureId) {
+    public HttpResult deleteGalleryPicture(Integer galleryId, Integer pictureId, Integer userId) {
+        if (!galleryMapper.selectByPrimaryKey(galleryId).getUserId().equals(userId)) {
+            throw new GalleryPictureDelFailException("图库图片删除失败——该用户无权限");
+        }
         int delete = 1;
         List<GalleryPicture> galleryPictureList = galleryPictureMapper.selectByGalleryId(galleryId);
         for (GalleryPicture galleryPicture : galleryPictureList) {
@@ -95,6 +101,15 @@ public class GalleryServiceImpl implements GalleryService {
             throw new GalleryPictureDelFailException("图库图片删除失败");
         }
         return HttpResult.success();
+    }
+
+    @Override
+    public HttpResult selectGalleryByUserId(Integer userId) {
+        List<Gallery> galleryList = galleryMapper.selectByUserId(userId);
+        if (galleryList == null || galleryList.size() == 0) {
+            return HttpResult.success("该用户无图库");
+        }
+        return HttpResult.success(galleryList);
     }
 
 
