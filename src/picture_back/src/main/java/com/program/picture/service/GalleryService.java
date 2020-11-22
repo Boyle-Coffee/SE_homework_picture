@@ -20,4 +20,6 @@ public interface GalleryService {
     HttpResult deleteGalleryPicture(Integer galleryId, Integer pictureId,Integer userId);
 
     HttpResult selectGalleryByUserId(Integer userId);
+
+    HttpResult selectPictureByGallery(Integer galleryId);
 }

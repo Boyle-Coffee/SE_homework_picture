@@ -5,12 +5,15 @@ import com.program.picture.common.exception.picture.PictureSelectFailException;
 import com.program.picture.common.result.HttpResult;
 import com.program.picture.domain.entity.Gallery;
 import com.program.picture.domain.entity.GalleryPicture;
+import com.program.picture.domain.entity.Picture;
 import com.program.picture.mapper.GalleryMapper;
 import com.program.picture.mapper.GalleryPictureMapper;
+import com.program.picture.mapper.PictureMapper;
 import com.program.picture.service.GalleryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +27,9 @@ public class GalleryServiceImpl implements GalleryService {
 
     @Autowired
     private GalleryMapper galleryMapper;
+
+    @Autowired
+    private PictureMapper pictureMapper;
 
     @Autowired
     private GalleryPictureMapper galleryPictureMapper;
@@ -110,6 +116,20 @@ public class GalleryServiceImpl implements GalleryService {
             return HttpResult.success("该用户无图库");
         }
         return HttpResult.success(galleryList);
+    }
+
+    @Override
+    public HttpResult selectPictureByGallery(Integer galleryId) {
+        List<GalleryPicture> galleryPictureList = galleryPictureMapper.selectByGalleryId(galleryId);
+        List<Picture> pictureList = new ArrayList<>();
+        if (galleryPictureList.size() == 0) {
+            return HttpResult.success("该图库无图片");
+        }
+        for (GalleryPicture galleryPicture : galleryPictureList) {
+            Picture picture = pictureMapper.selectByPrimaryKey(galleryPicture.getPictureId());
+            pictureList.add(picture);
+        }
+        return HttpResult.success(pictureList);
     }
 
 

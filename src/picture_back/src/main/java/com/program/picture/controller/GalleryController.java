@@ -117,4 +117,10 @@ public class GalleryController {
     public HttpResult selectUserGallery(@RequestParam(value = "userId") Integer userId) {
         return galleryService.selectGalleryByUserId(userId);
     }
+
+    @ApiOperation(value = "获取图库中的图片", notes = "根据图库Id获取图库图片")
+    @GetMapping("/getGalleryPicture")
+    public HttpResult selectGalleryPicture(@RequestParam(value = "galleryId") Integer galleryId) {
+        return galleryService.selectPictureByGallery(galleryId);
+    }
 }
