@@ -23,4 +23,6 @@ public interface PictureMapper {
     List<Picture> selectByUserId(Integer userId);
 
     Picture selectByPictureUrl(String path);
+
+    List<Picture> selectByName(String name);
 }

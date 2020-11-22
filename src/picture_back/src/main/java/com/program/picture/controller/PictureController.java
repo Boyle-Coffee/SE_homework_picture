@@ -147,14 +147,20 @@ public class PictureController {
     }
 
     @ApiOperation(value = "获取相似图片", notes = "根据图片url获取该图片的相似图片")
-    @PostMapping("/getSimilarPicture")
+    @GetMapping("/getSimilarPicture")
     public HttpResult selectSimilarPicture(@RequestParam(value = "pictureUrl") String pictureUrl) {
         return pictureService.selectSimilarPicture(pictureUrl);
     }
 
     @ApiOperation(value = "获取所有图片", notes = "根据时间进行排序获取所有公开图片(1为升序，0为降序)")
-    @PostMapping("/getAllPictureOrderTime")
-    public HttpResult sleectAllPictureOrderTime(@RequestParam(value = "isAsc") Integer isAsc) {
+    @GetMapping("/getAllPictureOrderTime")
+    public HttpResult selectAllPictureOrderTime(@RequestParam(value = "isAsc") Integer isAsc) {
         return pictureService.selectAll(isAsc);
+    }
+
+    @ApiOperation(value = "获取相关图片", notes = "根据输入内容查找相关图片")
+    @GetMapping("/getPictureByContent")
+    public HttpResult selectPictureByContent(@RequestParam(value = "content") String content) {
+        return pictureService.selectByContent(content);
     }
 }

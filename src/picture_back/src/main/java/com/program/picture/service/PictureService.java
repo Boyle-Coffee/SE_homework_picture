@@ -13,7 +13,7 @@ import java.util.List;
  **/
 public interface PictureService {
 
-    HttpResult deleteByPrimaryKey(Integer id,Integer userId);
+    HttpResult deleteByPrimaryKey(Integer id, Integer userId);
 
     HttpResult insert(Picture record);
 
@@ -28,4 +28,6 @@ public interface PictureService {
     HttpResult selectPictureByUserId(Integer userId);
 
     HttpResult selectSimilarPicture(String pictureUrl);
+
+    HttpResult selectByContent(String content);
 }

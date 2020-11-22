@@ -44,8 +44,8 @@ public class PictureServiceImpl implements PictureService {
     private PictureTypeMapper pictureTypeMapper;
 
     @Override
-    public HttpResult deleteByPrimaryKey(Integer id,Integer userId) {
-        if (!pictureMapper.selectByPrimaryKey(id).getUserId().equals(userId)){
+    public HttpResult deleteByPrimaryKey(Integer id, Integer userId) {
+        if (!pictureMapper.selectByPrimaryKey(id).getUserId().equals(userId)) {
             throw new PictureDelFailException("图片删除失败——该用户无权限删除");
         }
         if (pictureMapper.deleteByPrimaryKey(id) == 0) {
@@ -160,5 +160,14 @@ public class PictureServiceImpl implements PictureService {
             dataIntArray[i] = Integer.parseInt(dataArray[i]);
         }
         return HttpResult.success(dataIntArray);
+    }
+
+    @Override
+    public HttpResult selectByContent(String content) {
+        List<Picture> pictureList = pictureMapper.selectByName(content);
+        if (pictureList.size() == 0) {
+            return HttpResult.success("该内容无相关图片");
+        }
+        return HttpResult.success(pictureList);
     }
 }
