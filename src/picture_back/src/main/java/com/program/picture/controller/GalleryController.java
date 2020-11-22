@@ -45,8 +45,10 @@ public class GalleryController {
 
     @ApiOperation(value = "删除图库", notes = "根据图库Id删除图库")
     @DeleteMapping("/deleteGallery")
-    public HttpResult deleteGallery(@RequestParam(value = "galleyId") Integer galleyId) {
-        return galleryService.deleteByPrimaryKey(galleyId);
+    public HttpResult deleteGallery(@RequestParam(value = "galleyId") Integer galleyId,
+                                    @RequestParam(value = "userId") Integer userId
+    ) {
+        return galleryService.deleteByPrimaryKey(galleyId, userId);
     }
 
     @ApiOperation(value = "更新图库", notes = "更新图库信息")
@@ -98,8 +100,9 @@ public class GalleryController {
     @ApiOperation(value = "删除图库图片", notes = "根据图片Id和图库Id删除图库中的图片")
     @DeleteMapping("/deleteGalleryPicture")
     public HttpResult deleteGalleryPicture(@RequestParam(value = "galleryId") Integer galleryId,
-                                           @RequestParam(value = "pictureId") Integer pictureId) {
-        return galleryService.deleteGalleryPicture(galleryId, pictureId);
+                                           @RequestParam(value = "pictureId") Integer pictureId,
+                                           @RequestParam(value = "userId") Integer userId) {
+        return galleryService.deleteGalleryPicture(galleryId, pictureId, userId);
     }
 
     @ApiOperation(value = "添加图库图片", notes = "根据图片Id和图库Id添加图库中的图片")

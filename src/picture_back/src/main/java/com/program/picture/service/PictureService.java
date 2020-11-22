@@ -13,7 +13,7 @@ import java.util.List;
  **/
 public interface PictureService {
 
-    HttpResult deleteByPrimaryKey(Integer id);
+    HttpResult deleteByPrimaryKey(Integer id,Integer userId);
 
     HttpResult insert(Picture record);
 

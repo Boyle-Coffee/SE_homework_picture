@@ -44,7 +44,10 @@ public class PictureServiceImpl implements PictureService {
     private PictureTypeMapper pictureTypeMapper;
 
     @Override
-    public HttpResult deleteByPrimaryKey(Integer id) {
+    public HttpResult deleteByPrimaryKey(Integer id,Integer userId) {
+        if (!pictureMapper.selectByPrimaryKey(id).getUserId().equals(userId)){
+            throw new PictureDelFailException("图片删除失败——该用户无权限删除");
+        }
         if (pictureMapper.deleteByPrimaryKey(id) == 0) {
             throw new PictureDelFailException("图片删除失败");
         }

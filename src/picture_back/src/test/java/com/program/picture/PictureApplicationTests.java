@@ -24,12 +24,6 @@ class PictureApplicationTests {
 //        pictureService.insert(picture);
     }
 
-    @Test
-    void cosDelTest(){
-        COSClientUtil cosClientUtil = new COSClientUtil();
-        cosClientUtil.deleteFile("hyyyms-1301925880",
-                "https://hyyyms-1301925880.cos.ap-guangzhou.myqcloud.com/pictureWork/13591605325285287.jpg");
 
-    }
 
 }

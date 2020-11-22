@@ -57,8 +57,9 @@ public class PictureController {
 
     @ApiOperation(value = "删除图片", notes = "根据图片Id删除图片")
     @DeleteMapping("/deletePicture")
-    public HttpResult deletePicture(@RequestParam(value = "pictureId") Integer pictureId) {
-        return pictureService.deleteByPrimaryKey(pictureId);
+    public HttpResult deletePicture(@RequestParam(value = "pictureId") Integer pictureId,
+                                    @RequestParam(value = "userId") Integer userId) {
+        return pictureService.deleteByPrimaryKey(pictureId, userId);
     }
 
     @ApiOperation(value = "更新图片", notes = "更新图片信息")
