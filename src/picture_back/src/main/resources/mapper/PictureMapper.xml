@@ -47,4 +47,9 @@
     from picture
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
+    <select id="selectByPictureUrl" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, user_id, name, open, path, create_time, update_time
+    from picture
+    where path = #{path,jdbcType=INTEGER}
+  </select>
 </mapper>

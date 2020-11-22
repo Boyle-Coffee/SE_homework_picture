@@ -5,6 +5,7 @@ import com.program.picture.common.exception.picture.PictureDelFailException;
 import com.program.picture.common.exception.picture.PictureSelectFailException;
 import com.program.picture.common.exception.picture.PictureUpdateFailException;
 import com.program.picture.common.result.HttpResult;
+import com.program.picture.common.util.HttpRequestUtil;
 import com.program.picture.domain.entity.Picture;
 import com.program.picture.domain.entity.PictureType;
 import com.program.picture.mapper.PictureMapper;
@@ -13,8 +14,10 @@ import com.program.picture.service.PictureService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +32,8 @@ public class PictureServiceImpl implements PictureService {
 
     private static final Logger logger = LoggerFactory.getLogger(PictureServiceImpl.class);
 
+    @Resource
+    private HttpRequestUtil httpRequestUtil;
 
     @Autowired
     private PictureMapper pictureMapper;
@@ -47,8 +52,31 @@ public class PictureServiceImpl implements PictureService {
 
     @Override
     public HttpResult insert(Picture record) {
-        // todo  违规图片 ——》 ——》 以图搜图（放入数据库）——》放云端
+        JSONObject jsonParamRecognition = new JSONObject();
+        jsonParamRecognition.put("url", record.getPath());
+        String paramRecognition = jsonParamRecognition.toJSONString();
+        String resultRecognition =
+                HttpRequestUtil.sendPost("http://120.79.50.99:8100/imageRecognition",
+                        paramRecognition);
+        JSONObject resultRecognitionJson = JSONObject.parseObject(resultRecognition);
+        boolean recognition = (boolean) resultRecognitionJson.get("isSuccess");
+        if (!recognition) {
+            throw new PictureAddFailException("图片添加失败——该图片为违规图片");
+        }
         if (pictureMapper.insert(record) == 0) {
+            throw new PictureAddFailException("图片添加失败");
+        }
+        Picture picture = pictureMapper.selectByPictureUrl(record.getPath());
+        JSONObject jsonParamInsert = new JSONObject();
+        jsonParamInsert.put("pid", picture.getId() + "");
+        jsonParamInsert.put("url", picture.getPath());
+        String paramInsert = jsonParamInsert.toJSONString();
+        String resultInsert =
+                HttpRequestUtil.sendPost("http://120.79.50.99:8100/imageInsert",
+                        paramInsert);
+        JSONObject resultInsertJson = JSONObject.parseObject(resultInsert);
+        boolean insert = (boolean) resultInsertJson.get("isSuccess");
+        if (!insert) {
             throw new PictureAddFailException("图片添加失败");
         }
         logger.info("添加图片" + record);
@@ -104,5 +132,25 @@ public class PictureServiceImpl implements PictureService {
             return HttpResult.success("该用户无添加图片");
         }
         return HttpResult.success(pictureList);
+    }
+
+    @Override
+    public HttpResult selectSimilarPicture(String pictureUrl) {
+        JSONObject jsonParamSimilar = new JSONObject();
+        jsonParamSimilar.put("url", pictureUrl);
+        String paramSimilar = jsonParamSimilar.toJSONString();
+        String resultSimilar =
+                HttpRequestUtil.sendPost("http://120.79.50.99:8100/imageSearch",
+                        paramSimilar);
+        JSONObject resultSimilarJson = JSONObject.parseObject(resultSimilar);
+        String[] dataArray = (String[]) resultSimilarJson.get("data");
+        int[] dataIntArray = new int[dataArray.length];
+        for (int i = 0; i < dataArray.length; i++) {
+            dataIntArray[i] = Integer.parseInt(dataArray[i]);
+        }
+        if (dataIntArray.length == 0) {
+            return HttpResult.success("该图片无相似图片");
+        }
+        return HttpResult.success(dataIntArray);
     }
 }

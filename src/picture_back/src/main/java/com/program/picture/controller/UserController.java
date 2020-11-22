@@ -60,7 +60,7 @@ public class UserController {
             @RequestParam(value = "userId") Integer userId,
             @RequestParam(value = "oldPassword") String oldPassword,
             @RequestParam(value = "newPassword") String newPassword) {
-        return userService.userUpdatePassword(userId, oldPassword, oldPassword);
+        return userService.userUpdatePassword(userId, oldPassword, newPassword);
     }
 
     @ApiOperation(value = "更新用户名称", notes = "根据用户Id以及用户名称进行名称更新")

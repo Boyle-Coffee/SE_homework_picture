@@ -26,4 +26,6 @@ public interface PictureService {
     HttpResult selectPictureByType(Integer typeId);
 
     HttpResult selectPictureByUserId(Integer userId);
+
+    HttpResult selectSimilarPicture(String pictureUrl);
 }

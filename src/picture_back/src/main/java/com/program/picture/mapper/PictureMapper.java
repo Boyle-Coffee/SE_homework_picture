@@ -21,4 +21,6 @@ public interface PictureMapper {
     int updateByPrimaryKey(Picture record);
 
     List<Picture> selectByUserId(Integer userId);
+
+    Picture selectByPictureUrl(String path);
 }

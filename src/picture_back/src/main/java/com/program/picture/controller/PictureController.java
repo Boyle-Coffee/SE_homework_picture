@@ -27,10 +27,6 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/picture")
 public class PictureController {
-    /*
-     * todo
-     *   图片的查找—根据以图搜图查看相似图片
-     */
 
     @Resource
     private COSClientUtil cosClientUtil;
@@ -153,5 +149,11 @@ public class PictureController {
     @GetMapping("/getUserPicture")
     public HttpResult selectUserPicture(@RequestParam(value = "userId") Integer userId) {
         return pictureService.selectPictureByUserId(userId);
+    }
+
+    @ApiOperation(value = "获取相似图片", notes = "根据图片url获取该图片的相似图片")
+    @PostMapping("/similarPicture")
+    public HttpResult selectSimilarPicture(@RequestParam(value = "pictureUrl") String pictureUrl){
+        return pictureService.selectSimilarPicture(pictureUrl);
     }
 }
