@@ -10,6 +10,7 @@ import com.program.picture.domain.entity.Picture;
 import com.program.picture.domain.entity.PictureType;
 import com.program.picture.mapper.PictureMapper;
 import com.program.picture.mapper.PictureTypeMapper;
+import com.program.picture.mapper.UserMapper;
 import com.program.picture.service.PictureService;
 import io.swagger.models.auth.In;
 import org.slf4j.Logger;
@@ -34,8 +35,8 @@ public class PictureServiceImpl implements PictureService {
 
     private static final Logger logger = LoggerFactory.getLogger(PictureServiceImpl.class);
 
-    @Resource
-    private HttpRequestUtil httpRequestUtil;
+    @Autowired
+    private UserMapper userMapper;
 
     @Autowired
     private PictureMapper pictureMapper;
@@ -106,6 +107,7 @@ public class PictureServiceImpl implements PictureService {
         if (picture == null) {
             throw new PictureSelectFailException("图片查找失败");
         }
+        picture.setUserName(userMapper.selectByPrimaryKey(picture.getUserId()).getNickname());
         logger.info("查找图片" + picture);
         return HttpResult.success(picture);
     }
@@ -118,6 +120,9 @@ public class PictureServiceImpl implements PictureService {
         }
         if (isAsc != 1) {
             Collections.reverse(pictureList);
+        }
+        for (Picture picture : pictureList) {
+            picture.setUserName(userMapper.selectByPrimaryKey(picture.getUserId()).getNickname());
         }
         logger.info("查找图片" + pictureList);
         return HttpResult.success(pictureList);
@@ -140,7 +145,9 @@ public class PictureServiceImpl implements PictureService {
             return HttpResult.success("该标签无图片添加");
         }
         for (PictureType pictureType : pictureTypeList) {
-            pictureList.add(pictureMapper.selectByPrimaryKey(pictureType.getPictureId()));
+            Picture picture = pictureMapper.selectByPrimaryKey(pictureType.getPictureId());
+            picture.setUserName(userMapper.selectByPrimaryKey(picture.getUserId()).getNickname());
+            pictureList.add(picture);
         }
         return HttpResult.success(pictureList);
     }
@@ -150,6 +157,9 @@ public class PictureServiceImpl implements PictureService {
         List<Picture> pictureList = pictureMapper.selectByUserId(userId);
         if (pictureList == null || pictureList.size() == 0) {
             return HttpResult.success("该用户无添加图片");
+        }
+        for (Picture picture : pictureList) {
+            picture.setUserName(userMapper.selectByPrimaryKey(picture.getUserId()).getNickname());
         }
         return HttpResult.success(pictureList);
     }
@@ -179,6 +189,9 @@ public class PictureServiceImpl implements PictureService {
         List<Picture> pictureList = pictureMapper.selectByName(content);
         if (pictureList.size() == 0) {
             return HttpResult.success("该内容无相关图片");
+        }
+        for (Picture picture : pictureList) {
+            picture.setUserName(userMapper.selectByPrimaryKey(picture.getUserId()).getNickname());
         }
         return HttpResult.success(pictureList);
     }

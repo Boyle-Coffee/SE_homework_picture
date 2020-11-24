@@ -16,9 +16,6 @@ import java.util.Date;
 @ApiModel(value = "Picture", description = "图片类")
 public class Picture {
 
-    @Autowired
-    private UserMapper userMapper;
-
     @ApiModelProperty(value = "图片id", example = "1")
     private Integer id;
 
@@ -103,6 +100,5 @@ public class Picture {
 
     @Tolerate
     public Picture() {
-        this.userName = userMapper.selectByPrimaryKey(userId).getNickname();
     }
 }
