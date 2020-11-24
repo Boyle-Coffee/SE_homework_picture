@@ -75,14 +75,15 @@ public class PictureServiceImpl implements PictureService {
                 HttpRequestUtil.sendPost("http://120.79.50.99:8100/imageRecognition",
                         paramRecognition);
         JSONObject resultRecognitionJson = JSONObject.parseObject(resultRecognition);
-        boolean recognition = (boolean) resultRecognitionJson.get("isSuccess");
-        if (!recognition) {
-            throw new PictureAddFailException("图片添加失败——该图片为违规图片");
+        boolean isSuccess = (boolean) resultRecognitionJson.get("isSuccess");
+        if (!isSuccess) {
+            throw new PictureAddFailException("图片添加失败——图片识别失败");
         }
         if (pictureMapper.insert(record) == 0) {
-            throw new PictureAddFailException("图片添加失败");
+            throw new PictureAddFailException("图片添加失败——后端插入失败");
         }
-        Picture picture = pictureMapper.selectByPictureUrl(record.getPath());
+        List<Picture> pictureList = pictureMapper.selectByPictureUrl(record.getPath());
+        Picture picture = pictureList.get(0);
         JSONObject jsonParamInsert = new JSONObject();
         jsonParamInsert.put("pid", picture.getId() + "");
         jsonParamInsert.put("url", picture.getPath());
@@ -93,7 +94,7 @@ public class PictureServiceImpl implements PictureService {
         JSONObject resultInsertJson = JSONObject.parseObject(resultInsert);
         boolean insert = (boolean) resultInsertJson.get("isSuccess");
         if (!insert) {
-            throw new PictureAddFailException("图片添加失败");
+            throw new PictureAddFailException("图片添加失败——智能化插入失败");
         }
         logger.info("添加图片" + record);
         return HttpResult.success(picture.getId());

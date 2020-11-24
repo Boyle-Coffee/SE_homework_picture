@@ -1,11 +1,13 @@
 package com.program.picture.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.program.picture.mapper.UserMapper;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
@@ -14,8 +16,14 @@ import java.util.Date;
 @ApiModel(value = "Picture", description = "图片类")
 public class Picture {
 
+    @Autowired
+    private UserMapper userMapper;
+
     @ApiModelProperty(value = "图片id", example = "1")
     private Integer id;
+
+    @ApiModelProperty(value = "用户名称", example = "李大雷")
+    private String userName;
 
     @ApiModelProperty(value = "用户id", example = "1")
     private Integer userId;
@@ -95,5 +103,6 @@ public class Picture {
 
     @Tolerate
     public Picture() {
+        this.userName = userMapper.selectByPrimaryKey(userId).getNickname();
     }
 }
