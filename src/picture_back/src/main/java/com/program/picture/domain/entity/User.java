@@ -1,31 +1,24 @@
 package com.program.picture.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
+import lombok.Data;
+import lombok.experimental.Tolerate;
 
 import java.util.Date;
 
+@Data
 @Builder
-@ApiModel(value = "User", description = "用户类")
 public class User {
-
-    @ApiModelProperty(value = "用户id", example = "1")
     private Integer id;
 
-    @ApiModelProperty(value = "用户名称", example = "李大雷")
     private String name;
 
-    @ApiModelProperty(value = "用户密码", example = "123456")
+    private String nickname;
+
     private String password;
 
-    @ApiModelProperty(hidden = true)
-    @JsonIgnore
     private Date createTime;
 
-    @ApiModelProperty(hidden = true)
-    @JsonIgnore
     private Date updateTime;
 
     public Integer getId() {
@@ -42,6 +35,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname == null ? null : nickname.trim();
     }
 
     public String getPassword() {
@@ -66,5 +67,9 @@ public class User {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Tolerate
+    public User() {
     }
 }
