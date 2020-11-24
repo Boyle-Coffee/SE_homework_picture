@@ -1,3 +1,8 @@
 from django.contrib import admin
+from PictureModel.models import Image_info
 
-# Register your models here.
+
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ('pid', 'state','feature')
+
+admin.site.register(Image_info, ImageAdmin)
