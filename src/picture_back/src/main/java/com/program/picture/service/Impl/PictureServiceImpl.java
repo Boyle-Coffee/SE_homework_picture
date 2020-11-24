@@ -96,7 +96,7 @@ public class PictureServiceImpl implements PictureService {
             throw new PictureAddFailException("图片添加失败");
         }
         logger.info("添加图片" + record);
-        return HttpResult.success();
+        return HttpResult.success(picture.getId());
     }
 
     @Override
