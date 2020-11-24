@@ -46,6 +46,13 @@ public class UserController {
         return userService.userGetIdByName(userName);
     }
 
+    @ApiOperation(value = "获取用户昵称", notes = "根据用户Id获取昵称")
+    @GetMapping("/getNicknameById")
+    public HttpResult userGetNicknameById(
+            @RequestParam(value = "userId") Integer userId) {
+        return userService.userGetNicknameById(userId);
+    }
+
     @ApiOperation(value = "用户注册", notes = "根据用户名称以及用户密码进行注册")
     @PostMapping("/register")
     public HttpResult userRegister(
@@ -69,6 +76,14 @@ public class UserController {
             @RequestParam(value = "userId") Integer userId,
             @RequestParam(value = "userName") String userName) {
         return userService.userUpdateUserName(userId, userName);
+    }
+
+    @ApiOperation(value = "更新用户昵称", notes = "根据用户Id以及用户昵称进行昵称更新")
+    @PutMapping("/updateUserNickname")
+    public HttpResult userUpdateNickname(
+            @RequestParam(value = "userId") Integer userId,
+            @RequestParam(value = "Nickname") String Nickname) {
+        return userService.userUpdateNickname(userId, Nickname);
     }
 
     @ApiOperation(value = "更新用户信息", notes = "更新用户信息")

@@ -3,8 +3,6 @@ package com.program.picture.service;
 import com.program.picture.domain.entity.UserDetails;
 import com.program.picture.common.result.HttpResult;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 
 /**
  * @auther: Blue bear
@@ -18,9 +16,13 @@ public interface UserService {
 
     HttpResult userGetIdByName(String userName);
 
+    HttpResult userGetNicknameById(Integer userId);
+
     HttpResult userUpdatePassword(Integer userId, String oldPassword, String newPassword);
 
     HttpResult userUpdateUserName(Integer userId, String userName);
+
+    HttpResult userUpdateNickname(Integer userId, String Nickname);
 
     HttpResult userUpdateDetails(UserDetails details);
 

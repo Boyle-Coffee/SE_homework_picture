@@ -9,7 +9,7 @@ from .image_reco import image_reco
 from .image_violate import image_nsfw
 
 def hello_world(request):
-    return render(request, "API.html")
+    return render(request, "API2.html")
 
 
 def image_insert_view(request):
@@ -61,6 +61,32 @@ def image_search_view(request):
 
     url = post_json["url"]
     code, isSuccess, message, data = image_reco.image_search(url) # 搜索
+
+    return common_result(code, isSuccess, message, data)
+
+
+def image_delete_view(request):
+    # 接口要求的参数
+    require_params = ["pid"]
+
+    # 获取参数
+    if request.method == 'POST':  # 判断请求方式是否正确
+        post_json = json.loads(request.body)
+        print(type(post_json), post_json)
+        if not isinstance(post_json, dict):
+            message = "input json is error"
+            return common_result(400, False, message, None)
+    else:
+        message = "the method of request is error"
+        return common_result(400, False, message, None)
+
+    json_params = list(post_json.keys())
+    isSuccess, message = check_params(require_params, json_params)  # 判断json参数是否正确
+    if not isSuccess:
+        return common_result(400, False, message, None)
+
+    pid = post_json["pid"]
+    code, isSuccess, message = image_reco.image_delete(pid)
 
     return common_result(code, isSuccess, message, data)
 

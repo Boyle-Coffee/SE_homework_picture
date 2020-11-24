@@ -77,7 +77,8 @@ class ImageRocognition():
         """
         以图搜图功能
         :param <str> url: 图片地址
-        :return: <list> pids 相似图片id
+        :return: common result
+            <list> pids 相似图片id
         """
         try:
             image_rgb = image_imread(url)  # 获取图片
@@ -95,6 +96,24 @@ class ImageRocognition():
             print(traceback.format_exc())
 
             return 500, False, "some errors happened when calculate", None
+
+    def image_delete(self, pid):
+        """
+        删除图片接口
+        :param <str> pid: 图片id
+        :return: common result
+        """
+        try:
+            result = self.orm.delete_data(pid)
+            if not result:
+                msg = "An error occurred while delete data from the database"
+                return 500, False, msg
+
+            return 200, True, None
+        except Exception as e:
+            print(traceback.format_exc())
+
+            return 500, False, "some errors happened when calculate"
 
 
 image_reco = ImageRocognition()

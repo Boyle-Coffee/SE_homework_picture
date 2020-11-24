@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService {
                 .password(password)
                 .createTime(new Date())
                 .updateTime(new Date())
+                .nickname("这是可以改的昵称")
                 .build();
         userMapper.insert(newUser);
 
@@ -88,6 +89,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public HttpResult userGetNicknameById(Integer userId) {
+        User user = userMapper.selectByPrimaryKey(userId);
+        if(user!=null) return HttpResult.success(user.getNickname());
+        return HttpResult.failure(ResultCodeEnum.User_Not_Exists_Exception);
+    }
+
+    @Override
     public HttpResult userUpdatePassword(Integer userId, String oldPassword, String newPassword) {
         User user = userMapper.selectByPrimaryKey(userId);
         if (user.getPassword().equals(oldPassword)) {
@@ -113,6 +121,18 @@ public class UserServiceImpl implements UserService {
         user.setUpdateTime(new Date());
         userMapper.updateByPrimaryKey(user);
         return HttpResult.success();
+    }
+
+    @Override
+    public HttpResult userUpdateNickname(Integer userId, String Nickname) {
+        User user = userMapper.selectByPrimaryKey(userId);
+        if(user!=null) {
+            user.setNickname(Nickname);
+            user.setUpdateTime(new Date());
+            userMapper.updateByPrimaryKey(user);
+            return HttpResult.success();
+        }
+        return HttpResult.failure(ResultCodeEnum.User_Not_Exists_Exception);
     }
 
     @Override
