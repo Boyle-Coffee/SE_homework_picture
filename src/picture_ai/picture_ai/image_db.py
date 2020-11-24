@@ -43,5 +43,18 @@ class Image_db:
             feature_vec = str_to_np(feature) if feature_vec is None else np.vstack((feature_vec, str_to_np(feature)))
         return uids, feature_vec
 
+    def delete_data(self, pid):
+        """
+        删除数据
+        :param pid: 图片id
+        :return: <bool> 是否成功
+        """
+        try:
+            image_data = self.orm.objects.filter(pid=pid).delete()
+            return True
+        except:
+            print(traceback.format_exc())
+            return False
+
 
 image_orm = Image_db()
