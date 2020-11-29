@@ -31,7 +31,6 @@
     margin: auto auto;
     padding: 0;
     overflow: hidden;
-    width: 300px;
     height: 100%;
 }
 
@@ -71,6 +70,7 @@
     ;
 }
 
+/*
 .user-bar::after {
     position: absolute;
     top: 25px;
@@ -82,22 +82,54 @@
     border-bottom: 9px solid transparent;
     border-right: 9px solid transparent;
 }
+*/
+.user-bar img {
+    position: absolute;
+    margin: 5px 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+}
+
+.user-bar input {
+    position: absolute;
+    margin: 5px 10px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    background-color: transparent;
+    cursor: pointer;
+}
 
 .user-bar p {
     display: block;
     position: absolute;
     left: 65px;
-    margin: 0px;
-    padding: 15px 0;
+    width: 60px;
+    height: 30px;
+    margin: 15px;
+    padding: 0px 5px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    background-color: #ffffff;
     font-size: 20px;
-    color: #ffffff;
+    text-align: center;
 }
 
-.user-bar p a{
-    color: #ffffff;
+
+
+.user-bar p a {
+    display: block;
+    position: relative;
+    color: #000000;
+    margin: auto auto;
+    padding: 0;
     text-decoration: none;
-    letter-spacing: 5px;
+    letter-spacing: 1px;
 }
+
 
 
 /* 搜索框样式 */
@@ -136,7 +168,7 @@
     cursor: pointer;
     background-size: 30px auto;
     background-position: 0 -60px;
-    background-image: url('../image/search-img.png');
+    background-image: url('../images/search-img.png');
     background-repeat: no-repeat;
 }
 
@@ -165,7 +197,7 @@
     letter-spacing: 5px;
 }
 */
-.search-div input[type="submit"] {
+.search-div input[type="button"] {
     display: block;
     position: relative;
     float: right;
@@ -174,7 +206,7 @@
     height: 25px;
     background-color: transparent;
     background-size: 25px 25px;
-    background-image: url('../image/search.svg');
+    background-image: url('../images/search.svg');
     outline: 0;
     border: 0;
     cursor: pointer;
@@ -189,16 +221,16 @@
 /* 图片搜索框 */
 .picSearchLabel {
     position: absolute;
-    z-index: 998;
+    z-index: 999;
     right: 20%;
-    top: 70px;
+    top: 15px;
     width: 400px;
     height: 300px;
     border: 0px solid #ffffff;
     border-radius: 10px;
     background-color: #e2e2e2;
     box-shadow: 0 0 5px 2px #3f3f3f;
-    text-align:center;
+    text-align: center;
 }
 
 .a-upload {
@@ -207,7 +239,7 @@
     top: 220px;
     width: 100px;
     height: 20px;
-    margin: 0px 130px ;
+    margin: 0px 130px;
     line-height: 20px;
     position: relative;
     cursor: pointer;
@@ -220,7 +252,7 @@
     *display: inline;
 }
 
-.a-upload  input {
+.a-upload input {
     position: absolute;
     font-size: 100px;
     right: 0;
@@ -239,11 +271,11 @@
 
 
 
-.picSearchLabel #img_id{
+.picSearchLabel #img_id {
     position: relative;
     display: block;
     margin: 0px auto;
-    bottom: -25px;
+    bottom: 25px;
     max-width: 95%;
     max-height: 180px;
 
@@ -251,8 +283,8 @@
 }
 
 
-.picSearchLabel button{
-    position:absolute;
+.picSearchLabel button {
+    position: absolute;
     z-index: 999;
     top: 5px;
     right: 10px;
@@ -265,48 +297,6 @@
 
 
 
-/* 伪LOGO样式 */
-.logo-text {
-    font: 22px/1 Rounded MT;
-    letter-spacing: px;
-    fill: none;
-    stroke-width: 1.5;
-    stroke-linejoin: round;
-    stroke-dasharray: 70 330;
-    stroke-dashoffset: 0;
-    animation: stroke 10s infinite;
-}
-
-.logo-text:nth-child(5n + 1) {
-    stroke: #ffffff;
-    animation-delay: -1.5s;
-}
-
-.logo-text:nth-child(5n + 2) {
-    stroke: #9fa8da;
-    animation-delay: -3s;
-}
-
-.logo-text:nth-child(5n + 3) {
-    stroke: #7986cb;
-    animation-delay: -4.5s;
-}
-
-.logo-text:nth-child(5n + 4) {
-    stroke: #5c6bc0;
-    animation-delay: -6s;
-}
-
-.logo-text:nth-child(5n + 5) {
-    stroke: #ffffff;
-    animation-delay: -7.5s;
-}
-
-@keyframes stroke {
-    100% {
-        stroke-dashoffset: -400;
-    }
-}
 
 
 /* 热门搜索 */
@@ -409,6 +399,10 @@
     border-radius: 5px;
     background-color: #ffffff;
     text-align: center;
+    background-image: url(../images/img-loading.svg);
+    background-repeat: no-repeat;
+    background-size: auto 220px;
+    background-position-x: center;
     transition: all 0.3s;
 }
 
@@ -471,6 +465,7 @@
     border: 1px solid #ffffff;
     border-radius: 10px;
     background-color: #f1f1f1;
+    box-shadow: 0 0 20px -1px rgba(0, 0, 0, 0.5);
 }
 
 .userInfoCheck {
@@ -485,7 +480,7 @@
     background-color: #cfcfcf;
 }
 
-.userInfo ul {
+.userInfoCheck>ul {
     position: absolute;
     left: 0px;
     top: 0px;
@@ -498,7 +493,7 @@
     min-height: 600px;
 }
 
-.userInfo li {
+.userInfoCheck>ul>li {
     float: left;
     width: 200px;
     border-top: 0;
@@ -543,10 +538,438 @@
 .infoDiv>div {
 
     position: absolute;
-    top: 20px;
-    display: none;
+    top: 0px;
 }
 
-.infoDiv>div:first-child {
+
+
+
+
+/*个人信息*/
+#info1 {
+    width: 600px;
+    min-width: 600px;
+}
+
+#info1>p {
+    width: 400px;
+    margin: 50px 50px;
+    font-size: 20px;
+    color: #3a3a3a;
+    letter-spacing: 2px;
+}
+
+#info1>p:nth-child(2) {
+    position: absolute;
+    margin: 5px 50px;
+    font-size: 16px;
+    transform: translateY(-50px);
+
+}
+
+#info1>p>input {
+    width: auto;
+    height: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+#info1>p>select {
+    width: auto;
+    height: 22px;
+    padding-right: 20px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+#info1>button {
+    position: sticky;
+    float: right;
+    left: 20%;
+    bottom: 10%;
+    margin: 50px;
+    width: 100px;
+    height: 40px;
+    outline: none;
+    border: 0px solid #ffffff;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: #3ac1c7;
+    color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 20px -3px #888;
+    cursor: pointer;
+}
+
+#info1>button:hover {
+    background-color: yellowgreen;
+
+}
+
+
+/*图库*/
+#info2 {
+    width: 980px;
+    min-width: 600px;
+}
+
+.min-action-div {
     display: block;
+    position: relative;
+    width: 1000px;
+    height: 40px;
+    transform: translateX(-20px);
+    border-bottom: 2px solid #ffffff;
+    box-shadow: 0 5px 15px -10px;
+}
+
+.info2button {
+    position: relative;
+    height: 30px;
+    margin: 5px 20px;
+    padding: 0px 10px;
+    outline: none;
+    border: none;
+    background-color: rgba(0, 165, 36, 0.644);
+    border-radius: 5px;
+    font-size: 16px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.45s;
+}
+
+.info2button:hover {
+    background-color: rgba(12, 118, 204, 0.644);
+}
+
+.ul-img {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 960px;
+    height: auto;
+    min-height: 600px;
+}
+
+.ul-img>li {
+    position: relative;
+    float: left;
+    width: 220px;
+    height: 240px;
+    margin-top: 15px;
+    margin-right: 20px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    transition: all 0.3s;
+    background-image: url(../images/img-loading.svg);
+    background-repeat: no-repeat;
+    background-size: auto 200px;
+    background-position-x: center;
+    box-shadow: 5px 5px 10px -5px #7e7e7e;
+    transition: all 0.3s;
+}
+
+.ul-img>li:hover {
+    transform: scale(1.02);
+    box-shadow: 5px 5px 10px 2px #7e7e7e;
+}
+
+.ul-img>li img {
+    position: relative;
+    float: left;
+    width: 220px;
+    height: 200px;
+    max-width: none;
+    object-fit: cover;
+    border: none;
+    outline: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.ul-img>li img[src=""] {
+    opacity: 0;
+}
+
+.deleteButton {
+    opacity: 0;
+    position: relative;
+    top: -40px;
+    width: 220px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.589);
+    color: #ffffff;
+    font-size: 20px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.deleteButton:hover {
+    opacity: 1;
+}
+
+
+.ul-img>li>span {
+    display: block;
+    position: relative;
+    margin: 2px 5px;
+    top: -40px;
+    width: 100%;
+    float: left;
+    color: rgb(65, 65, 65);
+    text-align: left;
+}
+
+.InnerAlbum {
+    position: fixed;
+    top: 150px;
+    margin: 0px 200px;
+    width: 500px;
+    height: 300px;
+    border: 0px solid #2b2b2b;
+    border-radius: 5px;
+    background-color: #3f3f3f;
+    box-shadow: 0 0 15px 1px #5f5f5f;
+}
+
+.InnerAlbum>div:nth-child(1) {
+    display: inline;
+    position: relative;
+    width: 25px;
+    height: 25px;
+    margin: 0;
+    padding: 0;
+    float: right;
+    margin: 5px;
+    background-color: rgb(235, 61, 61);
+}
+
+.InnerAlbum p {
+    margin: 30px 50px;
+    color: #ffffff;
+}
+
+.InnerAlbum p>input {
+    width: auto;
+    height: 25px;
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.InnerAlbum p>select {
+    width: auto;
+    height: 22px;
+    margin-top: 10px;
+    padding-right: 20px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+
+/* 我的图片 */
+
+.PicUpLoad {
+    position: absolute;
+    top: 60px;
+    right: 50px;
+    width: 200px;
+    height: 150px;
+    /* border: 1px solid #666666; */
+    background-image: url(../images/UpLoadImg.svg);
+    background-repeat: no-repeat;
+    background-size: 150px;
+    background-color: transparent;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.PicUpLoad>span {
+    position: relative;
+    display: block;
+    left: 180px;
+    width: 25px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.PicUpLoad>img {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    top: 0px;
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    background-color: transparent;
+    box-shadow: 0 0 10px 1px #a3a3a3;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.PicUpLoad:hover {
+    transform: scale(1.02);
+}
+
+.PicUpLoad>img[src=" "],.PicUpLoad>img:not([src]) {
+    opacity: 0;
+}
+
+.PicUpLoad>input {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    top: 0px;
+    width: 200px;
+    height: 150px;
+    background: none;
+    outline: none;
+    border: none;
+    opacity: 0;
+    cursor: pointer;
+}
+
+
+
+
+/* 我的关注 */
+.ul-follow {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 960px;
+    height: auto;
+    min-height: 600px;
+}
+
+.ul-follow>li {
+    position: relative;
+    float: left;
+    width: 300px;
+    height: 60px;
+    margin-top: 15px;
+    margin-right: 20px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    transition: all 0.3s;
+    background-repeat: no-repeat;
+    background-size: auto 200px;
+    background-position-x: center;
+    box-shadow: 5px 5px 10px -5px #7e7e7e;
+    transition: all 0.3s;
+}
+
+.ul-follow>li>span {
+    display: block;
+    position: relative;
+    background-position-y: center;
+    margin: 20px 5px;
+    float: left;
+}
+
+.ul-follow>li:hover {
+    transform: scale(1.02);
+    box-shadow: 5px 5px 10px 2px #7e7e7e;
+}
+
+.deleteFollow {
+    opacity: 0.1;
+    position: relative;
+    float: right;
+    width: 100px;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.589);
+    color: #ffffff;
+    font-size: 20px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.deleteFollow:hover {
+    opacity: 1;
+}
+
+
+/*账户安全*/
+#info6>p {
+    width: 400px;
+    margin: 50px 50px;
+    font-size: 20px;
+    color: #3a3a3a;
+    letter-spacing: 2px;
+}
+
+
+
+#info6>p>input {
+    width: auto;
+    height: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    border: 1px solid #2894af;
+    border-radius: 5px;
+}
+
+#info6>p>input:focus {
+
+    border: 1px solid #8616ee;
+    transform: scale(1.02);
+
+}
+
+#info6>button {
+    position: absolute;
+    left: 10%;
+    margin: 50px;
+    width: 100px;
+    height: 40px;
+    outline: none;
+    border: 0px solid #ffffff;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: #3ac1c7;
+    color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 20px -3px #888;
+    cursor: pointer;
+}
+
+#info6>button:hover {
+    background-color: yellowgreen;
+
 }
