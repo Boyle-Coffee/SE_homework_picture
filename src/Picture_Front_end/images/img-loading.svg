@@ -1,0 +1,15 @@
+<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="502" width="502" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path stroke="#000" id="svg_1" d="m60.5,25.833l0,314.330385l380.000018,0l0,-314.330385l-380.000018,0zm320.1852,287.350384l-260.370383,0l0,-260.370383l260.370383,0l0,260.370383zm-197.037046,-158.333341c20.069631,0 36.353335,-16.283704 36.353335,-36.353335c0,-20.083705 -16.283704,-36.353335 -36.353335,-36.353335c-20.083705,0 -36.353335,16.283704 -36.353335,36.353335c0,20.069631 16.26963,36.353335 36.353335,36.353335zm182.977046,31.666668l-69.202225,-69.202225l-97.350375,97.350375l-26.980001,-26.980001l-38.731854,38.731854l0,72.692596l232.264455,0l0,-112.592598z" stroke-width="0" fill="#939393"/>
+  <text stroke="#000" transform="matrix(2.1998994986874596,0,0,2.1998994986874596,-120.04761926841996,-435.8987795618772) " xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="20" id="svg_2" y="387.155979" x="80.710841" stroke-opacity="null" stroke-width="0" fill="#939393">PicFun：加载中......</text>
+ </g>
+</svg>
