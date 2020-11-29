@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html style="min-width:768px">
+
+<head>
+    <meta charset="utf-8">
+    <title>PictureFun</title>
+    <meta name="description" content="插画及摄影作品交流">
+    <meta name="keywords" content="插画,摄影,漫画,图">
+    <meta name="author" content="诺亚方舟,Picture,Picture">
+    <link rel="shortcut icon" href="image/ico.ico" />
+    <link rel="stylesheet" type="text/css" href="css/lunbotu.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link href="css/sign-style.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="js/index.js"></script>
+
+</head>
+
+<body style="background-color: #f1f1f1;" onload="start()">
+    <div id="action bar" name="action-bar" class="action">
+        <p>PictureFun</p>
+
+
+
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="#hot">热门</a></li>
+            <li><a href="#new">最新</a></li>
+        </ul>
+        <div name="search" class="search-div">
+            <button type="button" onclick="picSearchDiv(1)"></button>
+            <form action="https://www.baidu.com/#ie=&wd=">
+
+                <input placeholder="长腿大胸小姐姐" type="text">
+
+                <input type="submit" value="">
+            </form>
+        </div>
+
+
+        <div id="picSearchDiv" style="position: fixed;width: 100%;min-width: 1200px;"></div>
+
+
+
+        <div name="用户控制" class="user-bar" onclick="sign(1)">
+            <img src="image/pic.jpg"
+                style="position: absolute;margin: 5px 10px;width: 50px;height: 50px;border-radius: 25px;;;">
+            <p><a href="user/index.html">个人中心</a></p>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div id="sign-back-img" class="sign-back-img"></div>
+    <div id="sign-back" class="sign-back">
+        <div id="sign-div" class="sign-div">
+
+
+
+            <h1>欢迎登录/加入 pictureFun 大家庭</h1>
+            <div class="form-w3ls">
+                <img src="image/close.png" class="x" onclick="sign(0); return false;">
+                <ul class="tab-group cl-effect-4">
+                    <li class="tab active"><a href="#signin-agile">Sign In</a></li>
+                    <li class="tab"><a href="#signup-agile">Join Us</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="signin-agile">
+                        <form action="apis/user/login" method="post">
+
+                            <p class="header">用户名</p>
+                            <input type="text" name="userName" required="required" placeholder="用户名">
+
+                            <p class="header">密码</p>
+                            <input type="password" name="password" required="required" placeholder="Password">
+
+                            <input type="checkbox" id="brand" value="">
+                            <label for="brand"><span></span> 记住账号？</label>
+
+                            <input type="submit" class="sign-in" value="登    录">
+
+                            <ul class="links">
+                                <li class="pass-w3ls"><a href="#">我忘记了密码...</a></li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div id="signup-agile">
+                        <form action="#" method="post">
+
+                            <p class="header">请输入用户名</p>
+                            <input type="text" name="user" required="required" placeholder="英文字母或阿拉伯数字">
+
+                            <p class="header">请输入手机号</p>
+                            <input type="tel" name="phone" required="required" placeholder="11位手机号">
+
+                            <p class="header">E-mail 地址</p>
+                            <input type="email" name="email" required="required" placeholder="Email@address.com">
+
+                            <p class="header">请输入密码</p>
+                            <input type="password" name="password" maxlength="16" minlength="8" required="required"
+                                placeholder="Password">
+
+                            <p class="header">请再次输入密码</p>
+                            <input type="password" name="password" maxlength="16" minlength="8" required="required"
+                                placeholder="Password">
+
+                            <input type="submit" class="register" value="加入PictureFun">
+                        </form>
+                    </div>
+                </div><!-- tab-content -->
+            </div> <!-- /form -->
+            <p class="copyright">@ 2020 PicturFun </p>
+
+
+
+        </div>
+    </div>
+
+    <div id="home" style="position: relative;;width: 1200px;min-width: 1200px;margin:30px auto;;">
+
+        <div id="container" class="clearFix">
+            <div id="list" class="clearFix" style="left: -780px">
+                <img src="image/lunbo/1.jpg" alt="" />
+                <img src="image/lunbo/4.jpg" alt="" />
+                <img src="image/lunbo/3.jpg" alt="" />
+                <img src="image/lunbo/5.jpg" alt="" />
+                <img src="image/lunbo/2.jpg" alt="" />
+                <img src="image/lunbo/3.jpg" alt="" />
+                <img src="image/lunbo/4.jpg" alt="" />
+            </div>
+            <div id="buttons" class="clearFix">
+                <span class="on"></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <a href="javascript:;" rel="external nofollow" id="prev" class="arrow">&lt;</a>
+            <a href="javascript:;" rel="external nofollow" id="next" class="arrow">&gt;</a>
+        </div>
+
+
+        <div name="search-label" id="search-label" class="search-label" onmouseover="sla()">
+            <p>✨热门搜索✨</p>
+            <a name="a">火影忍者</a>
+            <a>大鱼海棠</a>
+            <a>环太平洋</a>
+            <a>萝莉</a>
+            <a>泳装</a>
+            <a>约会大作战</a>
+            <a>一拳超人</a>
+            <a>奥特曼</a>
+            <a>花木兰</a>
+            <a>机甲战士</a>
+            <a>姜子牙</a>
+            <a>哪吒</a>
+            <a>COS</a>
+            <a>假面骑士</a>
+            <a>刀剑神域</a>
+
+        </div>
+
+
+        <div name="hot" class="index-pic-label">
+            <p>热门插画作品🔥<a href="hot-pic.html">更多》》</a></p>
+
+
+            <div name="img-box" class="img-box">
+                <div name="img-frame" class="img-frame">
+                    <img src="image/test1.png">
+                    <div class="img-explain">
+                        <p>这是说明</p>
+                        <p><img src="image/pic.jpg">
+                            <b>夏阳の微笑</b>
+
+                        </p>
+
+                    </div>
+                </div>
+
+                <div name="img-frame" class="img-frame">
+                    <img src="image/test1.png">
+                    <div class="img-explain">
+                        <p>这是说明</p>
+                        <p><img src="image/pic.jpg"></p>
+                        <b>夏阳の微笑</b>
+                    </div>
+                </div>
+
+                <div name="img-frame" class="img-frame">
+                    <img src="image/test1.png">
+                    <div class="img-explain">
+                        <p>这是说明</p>
+                        <p><img src="image/pic.jpg"></p>
+                        <b>夏阳の微笑</b>
+                    </div>
+                </div>
+
+                <div name="img-frame" class="img-frame">
+                    <img src="image/test1.png">
+                    <div class="img-explain">
+                        <p>这是说明</p>
+                        <p><img src="image/pic.jpg"></p>
+                        <b>夏阳の微笑</b>
+                    </div>
+                </div>
+
+                <div name="img-frame" class="img-frame">
+                    <img src="image/test1.png">
+                    <div class="img-explain">
+                        <p>这是说明</p>
+                        <p><img src="image/pic.jpg"></p>
+                        <b>夏阳の微笑</b>
+                    </div>
+                </div>
+
+                <div name="img-frame" class="img-frame">
+                    <img src="image/test1.png">
+                    <div class="img-explain">
+                        <p>这是说明</p>
+                        <p><img src="image/pic.jpg"></p>
+                        <b>夏阳の微笑</b>
+                    </div>
+                </div>
+
+                <div name="img-frame" class="img-frame">
+                    <img src="image/test1.png">
+                    <div class="img-explain">
+                        <p>这是说明</p>
+                        <p><img src="image/pic.jpg"></p>
+                        <b>夏阳の微笑</b>
+                    </div>
+                </div>
+
+                <div name="img-frame" class="img-frame">
+                    <img src="image/test1.png">
+                    <div class="img-explain">
+                        <p>这是说明</p>
+                        <p><img src="image/pic.jpg"></p>
+                        <b>夏阳の微笑</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div name="hot" class="index-pic-label">
+            <p>热门摄影作品🔥<a href="hot-pho.html">更多》》</a></p>
+
+
+            <div name="img-box" class="img-box">
+                <div name="img-frame" class="img-frame">
+                    <img src="image/test2.png">
+                    <div class="img-explain">
+                        <p>这是说明</p>
+                        <p><img src="image/pic.jpg">
+                            <b>夏阳の微笑</b>
+
+                        </p>
+
+                    </div>
+                </div>
+
+                <div name="img-frame" class="img-frame">
+                    <img src="image/test2.png">
+                    <div class="img-explain">
+                        <p>这是说明</p>
+                        <p><img src="image/pic.jpg"></p>
+                        <b>夏阳の微笑</b>
+                    </div>
+                </div>
+
+                <div name="img-frame" class="img-frame">
+                    <img src="image/test2.png">
+                    <div class="img-explain">
+                        <p>这是说明</p>
+                        <p><img src="image/pic.jpg"></p>
+                        <b>夏阳の微笑</b>
+                    </div>
+                </div>
+
+                <div name="img-frame" class="img-frame">
+                    <img src="image/test2.png">
+                    <div class="img-explain">
+                        <p>这是说明</p>
+                        <p><img src="image/pic.jpg"></p>
+                        <b>夏阳の微笑</b>
+                    </div>
+                </div>
+
+                <div name="img-frame" class="img-frame">
+                    <img src="image/test2.png">
+                    <div class="img-explain">
+                        <p>这是说明</p>
+                        <p><img src="image/pic.jpg"></p>
+                        <b>夏阳の微笑</b>
+                    </div>
+                </div>
+
+                <div name="img-frame" class="img-frame">
+                    <img src="image/test2.png">
+                    <div class="img-explain">
+                        <p>这是说明</p>
+                        <p><img src="image/pic.jpg"></p>
+                        <b>夏阳の微笑</b>
+                    </div>
+                </div>
+
+                <div name="img-frame" class="img-frame">
+                    <img src="image/test2.png">
+                    <div class="img-explain">
+                        <p>这是说明</p>
+                        <p><img src="image/pic.jpg"></p>
+                        <b>夏阳の微笑</b>
+                    </div>
+                </div>
+
+                <div name="img-frame" class="img-frame">
+                    <img src="image/test2.png">
+                    <div class="img-explain">
+                        <p>这是说明</p>
+                        <p><img src="image/pic.jpg"></p>
+                        <b>夏阳の微笑</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+<!-- 登录控制 -->
+<script src="js/jquery.min.js"></script>
+<script src="js/sign.js"></script>
+
+
+<script src="js/lunbotu.js"></script>
+
+
+
+<!-- 热门插图js -->
+<script>
+    var i = 1
+    var hotPicHtml = ''
+    while (i <= 8) {
+        hotPicHtml = hotPicHtml + '<div name="img-frame" class="img-frame">\
+                    <img src="image/test1.png">\
+                    <div class="img-explain">\
+                        <p>这是说明</p>\
+                        <p><img src="image/pic.jpg"></p>\
+                        <b>夏阳の微笑</b>\
+                    </div>\
+                </div>'
+        i = i + 1
+    }
+    document.getElementById('imgBoxPic').innerHTML = hotPicHtml
+</script>
+
+
+<!-- 热门摄影作品js -->
+<script>
+    var i = 1
+    var hotPicHtml = ''
+    while (i <= 8) {
+        hotPicHtml = hotPicHtml + '<div name="img-frame" class="img-frame">\
+                    <img src="image/test2.png">\
+                    <div class="img-explain">\
+                        <p>这是说明</p>\
+                        <p><img src="image/pic.jpg"></p>\
+                        <b>夏阳の微笑</b>\
+                    </div>\
+                </div>'
+        i = i + 1
+    }
+    document.getElementById('imgBoxPho').innerHTML = hotPicHtml
+</script>
+
+
+<!-- 看板娘，有网状态下显示 -->
+<script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+<script>
+    L2Dwidget.init({
+        "model": {
+            jsonPath: "https://unpkg.com/live2d-widget-model-koharu@1.0.5/assets/koharu.model.json",
+            "scale": 1
+        },
+        "display": {
+            "position": "right", //看板娘的表现位置
+            "width": 100, //小萝莉的宽度
+            "height": 200, //小萝莉的高度
+            "hOffset": 0, //小萝莉的X偏移量
+            "vOffset": -80 //小萝莉的Y偏移量
+        },
+        "mobile": {
+            "show": true,
+            "scale": 0.5
+        },
+        "react": {
+            "opacityDefault": 0.9, //小萝莉的透明度
+            "opacityOnHover": 0.2
+        }
+    });
+</script>
+
+</html>

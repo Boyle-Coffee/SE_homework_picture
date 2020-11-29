@@ -20,7 +20,7 @@
 
 </head>
 
-<body style="background-color: #f1f1f1;" onload="start()">
+<body style="background-color: #f1f1f1;">
     <div id="actionBar" class="action">
         <p>PictureFun</p>
 
@@ -28,10 +28,9 @@
             <!-- <li v-for="(iteam,index) in action.names">
                 <a :href="action.url[index]">{{action.names[index]}}</a>
             </li> -->
-
             <li><a href="index.html">首页</a></li>
-            <li><a href="#hotPic">热门</a></li>
-            <li><a href="#newPic">最新</a></li>
+            <li><a href="hot.html">热门</a></li>
+            <li><a href="new.html">最新</a></li>
         </ul>
 
         <div id="searchDiv" name="search" class="search-div">
@@ -52,58 +51,16 @@
     </div>
     <div id="picSearchDiv" style="z-index: 998;;position: fixed;width: 100%;min-width: 1200px;"></div>
 
-    <div id="home" style="position: relative;width: 1200px;min-width: 1200px;margin:30px auto;">
-
-        <div id="container" class="clearFix">
-            <div id="list" class="clearFix" style="left: -780px">
-                <img src="images/lunbo/1.jpg" alt="" />
-                <img src="images/lunbo/4.jpg" alt="" />
-                <img src="images/lunbo/3.jpg" alt="" />
-                <img src="images/lunbo/5.jpg" alt="" />
-                <img src="images/lunbo/2.jpg" alt="" />
-                <img src="images/lunbo/3.jpg" alt="" />
-                <img src="images/lunbo/4.jpg" alt="" />
-            </div>
-            <div id="buttons" class="clearFix">
-                <span class="on"></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <a href="javascript:;" rel="external nofollow" id="prev" class="arrow">&lt;</a>
-            <a href="javascript:;" rel="external nofollow" id="next" class="arrow">&gt;</a>
-        </div>
+    <div id="hotHome" style="position: relative;width: 1200px;min-width: 1200px;margin:30px auto;">
 
 
-        <div name="search-label" id="search-label" class="search-label" onmouseover="sla()">
-            <p>✨热门搜索✨</p>
-            <a name="a">火影忍者</a>
-            <a>大鱼海棠</a>
-            <a>环太平洋</a>
-            <a>萝莉</a>
-            <a>泳装</a>
-            <a>约会大作战</a>
-            <a>一拳超人</a>
-            <a>奥特曼</a>
-            <a>花木兰</a>
-            <a>机甲战士</a>
-            <a>姜子牙</a>
-            <a>哪吒</a>
-            <a>COS</a>
-            <a>假面骑士</a>
-            <a>刀剑神域</a>
-
-        </div>
-
-
-        <div id="hotPic" name="hot" class="index-pic-label" >
-            <p>热门作品🔥<button @click="getHotPictures()">测试</button><a href="hot.html">更多》》</a></p>
+        <div  name="hot" class="index-pic-label" >
+            <p>热门作品🔥</p>
 
 
             <div name="img-box" class="img-box">
                 <div name="img-frame" class="img-frame" v-for="item in hotPics">
-                    <img v-bind:src="item.path"  @click="showPic(item.id,item.path)">
+                    <img v-bind:src="item.path" @click="showPic(item.id,item.path)">
                     <div class="img-explain">
                         <p>{{item.name}}</p>
                         <p><img src="images/pic.jpg">
@@ -163,77 +120,9 @@
                 </div>
         
             </div>
-    
-            
+
         </div>
 
-
-        <div id="newPic" name="new" class="index-pic-label">
-            <p>最新作品🔥<button @click="getNewPictures()">测试</button><a href="new.html">更多》》</a></p>
-
-
-            <div name="img-box" class="img-box">
-                <div name="img-frame" class="img-frame" v-for="item in newPics">
-                    <img v-bind:src="item.path" @click="showPic(item.id,item.path)">
-                    <div class="img-explain">
-                        <p>{{item.name}}</p>
-                        <p><img src="images/pic.jpg">
-                            <b>{{item.userName}}</b>
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-
-            <div  class="showBar" v-if="show">
-                <div class="close">
-                    <button class="close" @click="closeShowBar()">X</button>
-                </div>
-        
-                <div class="isbr">
-                    <img v-bind:src="PicPath">
-        
-                    <a href="javascript:;" rel="external nofollow" id="prev" class="arrowP">&lt;</a>
-                    <a href="javascript:;" rel="external nofollow" id="next" class="arrowN">&gt;</a>
-        
-        
-                </div>
-        
-                <div class="commend">
-                    <ul>
-                        <p v-if="mess" style="color: #ffffff;">暂无评论，先评论一下吧ヾ(≧▽≦*)o</p>
-                        <li v-for="item in CommentPic">
-                            <p>
-                                <span>{{item.userId}}</span>
-                                <span>说：</span>
-                                <span >{{item.content}}</span>
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <span>李大雷</span>
-                                <span>说：</span>
-                                <span >真不错(测试评论，一直存在)</span>
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="word">
-                            <textarea type="text" v-model="commendT"></textarea>
-                    <button @click="addComment(PicIdTemp)">评论</button>
-                    <!-- <button @click="showPic(22,1234)">测试</button> -->
-                </div>
-    
-    
-                <div class="stage">
-                    <div class="heart"></div>
-                    <div class="collect">
-                        <button>&#9733;</button>
-                    </div>
-                </div>
-        
-            </div>
-        </div>
 
 
     </div>
@@ -305,18 +194,18 @@
             </div>
         </div>
 
-
-
-
-
-    
-
+<script>
+    $(function () {
+    $(".heart").on("click", function () {
+        $(this).toggleClass("is-active");
+    });
+})
+</script>
 
 
         <script src="js/vue.js"></script>
         <script src="js/myIndex.js"></script>
         <script src="js/sign.js"></script>
-        <script src="js/lunbotu.js"></script>
         <script src="js/cookie.js"></script>
         <script src="js/getPicture.js"></script>
 
