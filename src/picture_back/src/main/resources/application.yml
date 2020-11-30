@@ -1,6 +1,11 @@
 spring:
   profiles:
-    active: dev
+    active: prod
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB #单个文件最大大小
+      max-request-size: 1024MB #上传数据总大小
   # datasource配置
   datasource:
     # 扩展插件

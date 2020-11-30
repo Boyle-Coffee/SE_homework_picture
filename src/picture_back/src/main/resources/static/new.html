@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html style="min-width:768px">
+
+<head>
+    <meta charset="utf-8">
+    <title>PictureFun</title>
+    <meta name="description" content="插画及摄影作品交流">
+    <meta name="keywords" content="插画,摄影,漫画,图">
+    <meta name="author" content="诺亚方舟,Picture,Picture">
+    <link rel="shortcut icon" href="images/ico.ico" />
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/sign-style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css/lunbotu.css">
+    <link rel="stylesheet" href="css/showBar.css">
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/axios.js"></script>
+    <script src="js/jquery-3.5.1.min.map"></script>
+    <script src="js/axios.map"></script>
+
+
+</head>
+
+<body style="background-color: #f1f1f1;" onload="start()">
+    <div id="actionBar" class="action">
+        <p>PictureFun</p>
+
+        <ul>
+            <!-- <li v-for="(iteam,index) in action.names">
+                <a :href="action.url[index]">{{action.names[index]}}</a>
+            </li> -->
+            <li><a href="index.html">首页</a></li>
+            <li><a href="hot.html">热门</a></li>
+            <li><a href="new.html">最新</a></li>
+        </ul>
+
+        <div id="searchDiv" name="search" class="search-div">
+            <button type="button" onclick="picSearchDiv(1)"></button>
+            <input type="text" name="SearchWord" placeholder="输入关键词" required="required" v-model="searchWord" @keyup.enter="search()">
+            <input type="button" @click="search()" value="">
+        </div>
+
+
+
+        <div name="用户控制" class="user-bar">
+            <img :src="userPic" onclick="">
+            <input type="button" onclick="location.href='user.html'">
+            <p v-show="!uid" ><a  onclick="sign(1)">登录</a></p>
+            <p v-show="uid"><a @click="delCookie('uid')">退出</a></p>
+        </div>
+
+    </div>
+    <div id="picSearchDiv" style="z-index: 998;;position: fixed;width: 100%;min-width: 1200px;"></div>
+
+    <div id="newHome" style="position: relative;width: 1200px;min-width: 1200px;margin:30px auto;">
+
+        <div name="new" class="index-pic-label">
+            <p>最新作品🔥</p>
+
+
+            <div name="img-box" class="img-box">
+                <div name="img-frame" class="img-frame" v-for="item in newPics">
+                    <img v-bind:src="item.path" @click="showPic(item.id,item.path)">
+                    <div class="img-explain">
+                        <p>{{item.name}}</p>
+                        <p><img src="images/pic.jpg">
+                            <b>{{item.userName}}</b>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="showBar" v-if="show">
+                <div class="close">
+                    <button class="close" @click="closeShowBar()">X</button>
+                </div>
+        
+                <div class="isbr">
+                    <img v-bind:src="PicPath">
+        
+                    <a href="javascript:;" rel="external nofollow" id="prev" class="arrowP">&lt;</a>
+                    <a href="javascript:;" rel="external nofollow" id="next" class="arrowN">&gt;</a>
+        
+        
+                </div>
+        
+                <div class="commend">
+                    <ul>
+                        <p v-if="mess" style="color: #ffffff;">暂无评论，先评论一下吧ヾ(≧▽≦*)o</p>
+                        <li v-for="item in CommentPic">
+                            <p>
+                                <span>{{item.userId}}</span>
+                                <span>说：</span>
+                                <span >{{item.content}}</span>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <span>李大雷</span>
+                                <span>说：</span>
+                                <span >真不错(测试评论，一直存在)</span>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="word">
+                            <textarea type="text" v-model="commendT"></textarea>
+                    <button @click="addComment(PicIdTemp)">评论</button>
+                    <!-- <button @click="showPic(22,1234)">测试</button> -->
+                </div>
+    
+    
+                <div class="stage">
+                    <div class="heart"></div>
+                    <div class="collect">
+                        <button>&#9733;</button>
+                    </div>
+                </div>
+        
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <header>
+
+
+        <!--登录-->
+        <div id="sign-back-img" class="sign-back-img"></div>
+
+        <div id="sign-back" class="sign-back">
+
+            <!-- <button onclick="sign(0); return false;></button> -->
+            <div id="sign-div" class="sign-div">
+
+
+
+                <h1>欢迎登录/加入 pictureFun 大家庭</h1>
+                <div class="form-w3ls">
+                    <img src="images/close.svg" class="x" onclick="sign(0); return false;">
+                    <ul class="tab-group cl-effect-4">
+                        <li class="tab active"><a href="#signin-agile">Sign In</a></li>
+                        <li class="tab"><a href="#signup-agile">Join Us</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="signin-agile">
+                            <p class="header">用户名</p>
+                            <input type="text" name="user" required="required" placeholder="用户名" v-model="userName">
+
+                            <p class="header">密码</p>
+                            <input type="password" name="password" required="required" placeholder="Password"
+                                v-model="password" @keyup.enter="signIn">
+                            <br>
+                            <input type="checkbox" id="brand" value="">
+                            <label for="brand"><span></span> 记住账号？</label>
+
+                            <input type="button" class="sign-in" @click="signIn" value="登    录">
+
+                        </div>
+                        <div id="signup-agile">
+
+                            <p class="header">请输入用户名</p>
+                            <input type="text" name="user" required="required" placeholder="英文字母或阿拉伯数字"
+                                v-model="userName">
+
+                            <p class="header">请输入密码</p>
+                            <input type="password" name="password" maxlength="16" minlength="8" required="required"
+                                placeholder="Password" v-model="password">
+
+                            <input type="button" class="register" @click="signUp" value="加入PictureFun">
+
+                        </div>
+                    </div><!-- tab-content -->
+                </div> <!-- /form -->
+                <p class="copyright">@ 2020 PictureFun </p>
+
+
+
+            </div>
+        </div>
+
+
+
+
+        <script src="js/vue.js"></script>
+        <script src="js/myIndex.js"></script>
+        <script src="js/sign.js"></script>
+        <script src="js/lunbotu.js"></script>
+        <script src="js/cookie.js"></script>
+        <script src="js/getPicture.js"></script>
+
+
+
+
+
+
+
+
+    </header>
+</body>
+
+</html>

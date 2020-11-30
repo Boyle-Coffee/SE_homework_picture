@@ -1,0 +1,975 @@
+/* 导航栏样式 */
+.action {
+    z-index: 998;
+    position: sticky;
+    width: 100%;
+    min-width: 1200px;
+    height: 60px;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(46, 135, 236);
+    box-shadow: 0 3px 5px;
+}
+
+.action p {
+    position: absolute;
+    left: 10px;
+    margin: 10px auto;
+    margin: 0px;
+    padding: 5px;
+    color: #ffffff;
+    font-size: 40px
+}
+
+.action ul {
+    position: absolute;
+    left: 260px;
+    top: 0;
+    list-style-type: none;
+    margin: auto auto;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+}
+
+.action li {
+    float: left;
+    border-right: 1px solid #ffffff;
+}
+
+.action li:last-child {
+    border-right: none;
+}
+
+.action li a {
+    display: block;
+    color: #ffffff;
+    text-align: center;
+    font-size: 22px;
+    text-decoration: none;
+    padding: 15px 20px;
+    ;
+    ;
+}
+
+.action li a:hover {
+    background-color: #17c425;
+}
+
+.user-bar {
+    display: block;
+    position: absolute;
+    right: 15px;
+    width: 200px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    ;
+}
+
+/*
+.user-bar::after {
+    position: absolute;
+    top: 25px;
+    right: 10px;
+    content: '';
+    display: inline-block;
+    border-top: 9px solid #ffffff;
+    border-left: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    border-right: 9px solid transparent;
+}
+*/
+.user-bar img {
+    position: absolute;
+    margin: 5px 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+}
+
+.user-bar input {
+    position: absolute;
+    margin: 5px 10px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.user-bar p {
+    display: block;
+    position: absolute;
+    left: 65px;
+    width: 60px;
+    height: 30px;
+    margin: 15px;
+    padding: 0px 5px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    background-color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+}
+
+
+
+.user-bar p a {
+    display: block;
+    position: relative;
+    color: #000000;
+    margin: auto auto;
+    padding: 0;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+
+
+/* 搜索框样式 */
+.search-div {
+    opacity: 1;
+    position: absolute;
+    right: 20%;
+    width: 400px;
+    height: 40px;
+    margin: 10px 0px;
+    border-radius: 20px;
+    background-color: #f4f4f4;
+}
+
+.search-div input[type="text"] {
+    position: absolute;
+    left: 15px;
+    width: 290px;
+    height: 38px;
+    outline: 0;
+    border: 0px solid #ffffff;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f4f4f4;
+    color: #666666;
+}
+
+.search-div button {
+    position: absolute;
+    right: 50px;
+    margin: 6px auto;
+    height: 30px;
+    width: 30px;
+    outline: 0;
+    border-style: none;
+    cursor: pointer;
+    background-size: 30px auto;
+    background-position: 0 -60px;
+    background-image: url('../images/search-img.png');
+    background-repeat: no-repeat;
+}
+
+.search-div button:hover {
+    background-position: 0 -90px;
+}
+
+/*
+.search-div input[type="submit"] {
+    opacity: 1;
+    display: block;
+    position: absolute;
+    right: 0px;
+    width: 80px;
+    height: 40px;
+    border-radius: 5px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    background-color: #40B3DF;
+    width: 80px;
+    outline: 1;
+    border: 0;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 25px;
+    letter-spacing: 5px;
+}
+*/
+.search-div input[type="button"] {
+    display: block;
+    position: relative;
+    float: right;
+    margin: 8px 10px;
+    width: 25px;
+    height: 25px;
+    background-color: transparent;
+    background-size: 25px 25px;
+    background-image: url('../images/search.svg');
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 25px;
+    letter-spacing: 5px;
+}
+
+
+
+
+/* 图片搜索框 */
+.picSearchLabel {
+    position: absolute;
+    z-index: 999;
+    right: 20%;
+    top: 15px;
+    width: 400px;
+    height: 300px;
+    border: 0px solid #ffffff;
+    border-radius: 10px;
+    background-color: #e2e2e2;
+    box-shadow: 0 0 5px 2px #3f3f3f;
+    text-align: center;
+}
+
+.a-upload {
+    z-index: 999;
+    padding: 4px 10px;
+    top: 220px;
+    width: 100px;
+    height: 20px;
+    margin: 0px 130px;
+    line-height: 20px;
+    position: relative;
+    cursor: pointer;
+    color: #888;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+
+    display: inline-block;
+    *display: inline;
+}
+
+.a-upload input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer
+}
+
+.a-upload:hover {
+    color: #444;
+    background: #eee;
+    border-color: #ccc;
+    text-decoration: none
+}
+
+
+
+.picSearchLabel #img_id {
+    position: relative;
+    display: block;
+    margin: 0px auto;
+    bottom: 25px;
+    max-width: 95%;
+    max-height: 180px;
+
+
+}
+
+
+.picSearchLabel button {
+    position: absolute;
+    z-index: 999;
+    top: 5px;
+    right: 10px;
+    width: 50px;
+    height: 30px;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+
+
+
+
+
+/* 热门搜索 */
+.search-label {
+    position: absolute;
+    right: 0px;
+    top: 0;
+    width: 370px;
+    height: 350px;
+    background-color: #ffffff;
+    border-radius: 10px;
+
+}
+
+.search-label p {
+    margin-top: 10px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    color: #000;
+    font-weight: 700;
+
+
+}
+
+.search-label a {
+    width: 22%;
+    display: block;
+    text-align: center;
+    padding: 5px 5px;
+    float: left;
+    font-size: 16px;
+    /*background-color: #17c425;*/
+    color: #858585;
+    line-height: 20px;
+    border: 1px solid #e9e9e9;
+    border-radius: 15px;
+    margin: 13px 14px;
+    overflow: hidden;
+    height: 18px;
+    transition: all 0.4s;
+}
+
+.search-label a:hover {
+    color: #000000;
+    cursor: pointer;
+    transform: scale(1.3);
+}
+
+
+/* 图集显示样式 */
+.index-pic-label {
+    position: relative;
+    width: 1200px;
+    height: 700px;
+    margin-top: 20px;
+    padding: 0;
+    border-radius: 5px;
+}
+
+.index-pic-label>p {
+    position: relative;
+    float: left;
+    width: 1200px;
+    height: 20px;
+    text-align: left;
+    font-size: 24px;
+    color: #2b2b2b;
+    font-weight: 700;
+}
+
+.index-pic-label>p>a {
+    position: relative;
+    float: right;
+    margin: 0px 10px;
+    height: 20px;
+    text-align: left;
+    text-decoration: none;
+    font-size: 18px;
+    color: #9b9b9b;
+    font-weight: 700;
+}
+
+.index-pic-label>p>a:hover {
+    cursor: pointer;
+}
+
+.img-box {
+    position: relative;
+}
+
+.img-frame {
+    position: relative;
+    float: left;
+    width: 280px;
+    height: 300px;
+    margin-top: 15px;
+    margin-right: 26px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    text-align: center;
+    background-image: url(../images/img-loading.svg);
+    background-repeat: no-repeat;
+    background-size: auto 220px;
+    background-position-x: center;
+    transition: all 0.3s;
+}
+
+.img-frame:hover {
+    transform: scale(1.02);
+    box-shadow: 5px 5px 10px #7e7e7e;
+}
+
+.img-box :nth-child(4n) {
+    margin-right: 0px;
+}
+
+.img-frame>img {
+    width: 280px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+
+}
+
+.img-frame p {
+    margin: 10px;
+    text-align: left;
+    cursor: context-menu;
+}
+
+.img-explain {
+    position: absolute;
+    width: 100%;
+    text-align: left;
+}
+
+.img-explain img {
+    position: absolute;
+    cursor: pointer;
+    left: 5%;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.img-explain b {
+    position: relative;
+    top: 10px;
+    left: 60px;
+    cursor: pointer;
+}
+
+
+
+/* 个人信息页 */
+.userInfo {
+    position: absolute;
+    width: 1200px;
+    height: auto;
+    min-height: 1200px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    background-color: #f1f1f1;
+    box-shadow: 0 0 20px -1px rgba(0, 0, 0, 0.5);
+}
+
+.userInfoCheck {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 200px;
+    min-height: 1200px;
+    border: 0px;
+    border-right: 1px solid #ffffff;
+    border-top-left-radius: 10px;
+    background-color: #cfcfcf;
+}
+
+.userInfoCheck>ul {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    list-style-type: none;
+    margin: auto auto;
+    padding: 0;
+    overflow: hidden;
+    width: 200px;
+    height: auto;
+    min-height: 600px;
+}
+
+.userInfoCheck>ul>li {
+    float: left;
+    width: 200px;
+    border-top: 0;
+    border-bottom: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
+
+}
+
+
+
+
+
+.userInfo li a {
+    display: block;
+    color: #4e4e4e;
+    text-align: center;
+    font-size: 22px;
+    text-decoration: none;
+    padding: 15px 20px;
+    letter-spacing: 5px;
+    ;
+}
+
+.userInfo li:first-child a {
+    border-top-left-radius: 10px;
+}
+
+.userInfo li a:hover {
+    background-color: rgba(9, 240, 186, 0.5);
+    color: #ffffff;
+}
+
+
+.infoDiv {
+    position: absolute;
+    top: 0px;
+    left: 220px;
+    width: 980px;
+
+}
+
+.infoDiv>div {
+
+    position: absolute;
+    top: 0px;
+}
+
+
+
+
+
+/*个人信息*/
+#info1 {
+    width: 600px;
+    min-width: 600px;
+}
+
+#info1>p {
+    width: 400px;
+    margin: 50px 50px;
+    font-size: 20px;
+    color: #3a3a3a;
+    letter-spacing: 2px;
+}
+
+#info1>p:nth-child(2) {
+    position: absolute;
+    margin: 5px 50px;
+    font-size: 16px;
+    transform: translateY(-50px);
+
+}
+
+#info1>p>input {
+    width: auto;
+    height: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+#info1>p>select {
+    width: auto;
+    height: 22px;
+    padding-right: 20px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+#info1>button {
+    position: sticky;
+    float: right;
+    left: 20%;
+    bottom: 10%;
+    margin: 50px;
+    width: 100px;
+    height: 40px;
+    outline: none;
+    border: 0px solid #ffffff;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: #3ac1c7;
+    color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 20px -3px #888;
+    cursor: pointer;
+}
+
+#info1>button:hover {
+    background-color: yellowgreen;
+
+}
+
+
+/*图库*/
+#info2 {
+    width: 980px;
+    min-width: 600px;
+}
+
+.min-action-div {
+    display: block;
+    position: relative;
+    width: 1000px;
+    height: 40px;
+    transform: translateX(-20px);
+    border-bottom: 2px solid #ffffff;
+    box-shadow: 0 5px 15px -10px;
+}
+
+.info2button {
+    position: relative;
+    height: 30px;
+    margin: 5px 20px;
+    padding: 0px 10px;
+    outline: none;
+    border: none;
+    background-color: rgba(0, 165, 36, 0.644);
+    border-radius: 5px;
+    font-size: 16px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.45s;
+}
+
+.info2button:hover {
+    background-color: rgba(12, 118, 204, 0.644);
+}
+
+.ul-img {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 960px;
+    height: auto;
+    min-height: 600px;
+}
+
+.ul-img>li {
+    position: relative;
+    float: left;
+    width: 220px;
+    height: 240px;
+    margin-top: 15px;
+    margin-right: 20px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    transition: all 0.3s;
+    background-image: url(../images/img-loading.svg);
+    background-repeat: no-repeat;
+    background-size: auto 200px;
+    background-position-x: center;
+    box-shadow: 5px 5px 10px -5px #7e7e7e;
+    transition: all 0.3s;
+}
+
+.ul-img>li:hover {
+    transform: scale(1.02);
+    box-shadow: 5px 5px 10px 2px #7e7e7e;
+}
+
+.ul-img>li img {
+    position: relative;
+    float: left;
+    width: 220px;
+    height: 200px;
+    max-width: none;
+    object-fit: cover;
+    border: none;
+    outline: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.ul-img>li img[src=""] {
+    opacity: 0;
+}
+
+.deleteButton {
+    opacity: 0;
+    position: relative;
+    top: -40px;
+    width: 220px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.589);
+    color: #ffffff;
+    font-size: 20px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.deleteButton:hover {
+    opacity: 1;
+}
+
+
+.ul-img>li>span {
+    display: block;
+    position: relative;
+    margin: 2px 5px;
+    top: -40px;
+    width: 100%;
+    float: left;
+    color: rgb(65, 65, 65);
+    text-align: left;
+}
+
+.InnerAlbum {
+    position: fixed;
+    top: 150px;
+    margin: 0px 200px;
+    width: 500px;
+    height: 300px;
+    border: 0px solid #2b2b2b;
+    border-radius: 5px;
+    background-color: #3f3f3f;
+    box-shadow: 0 0 15px 1px #5f5f5f;
+}
+
+.InnerAlbum>div:nth-child(1) {
+    display: inline;
+    position: relative;
+    width: 25px;
+    height: 25px;
+    margin: 0;
+    padding: 0;
+    float: right;
+    margin: 5px;
+    background-color: rgb(235, 61, 61);
+}
+
+.InnerAlbum p {
+    margin: 30px 50px;
+    color: #ffffff;
+}
+
+.InnerAlbum p>input {
+    width: auto;
+    height: 25px;
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.InnerAlbum p>select {
+    width: auto;
+    height: 22px;
+    margin-top: 10px;
+    padding-right: 20px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+
+/* 我的图片 */
+
+.PicUpLoad {
+    position: absolute;
+    top: 60px;
+    right: 50px;
+    width: 200px;
+    height: 150px;
+    /* border: 1px solid #666666; */
+    background-image: url(../images/UpLoadImg.svg);
+    background-repeat: no-repeat;
+    background-size: 150px;
+    background-color: transparent;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.PicUpLoad>span {
+    position: relative;
+    display: block;
+    left: 180px;
+    width: 25px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.PicUpLoad>img {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    top: 0px;
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    background-color: transparent;
+    box-shadow: 0 0 10px 1px #a3a3a3;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.PicUpLoad:hover {
+    transform: scale(1.02);
+}
+
+.PicUpLoad>img[src=" "],.PicUpLoad>img:not([src]) {
+    opacity: 0;
+}
+
+.PicUpLoad>input {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    top: 0px;
+    width: 200px;
+    height: 150px;
+    background: none;
+    outline: none;
+    border: none;
+    opacity: 0;
+    cursor: pointer;
+}
+
+
+
+
+/* 我的关注 */
+.ul-follow {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 960px;
+    height: auto;
+    min-height: 600px;
+}
+
+.ul-follow>li {
+    position: relative;
+    float: left;
+    width: 300px;
+    height: 60px;
+    margin-top: 15px;
+    margin-right: 20px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    transition: all 0.3s;
+    background-repeat: no-repeat;
+    background-size: auto 200px;
+    background-position-x: center;
+    box-shadow: 5px 5px 10px -5px #7e7e7e;
+    transition: all 0.3s;
+}
+
+.ul-follow>li>span {
+    display: block;
+    position: relative;
+    background-position-y: center;
+    margin: 20px 5px;
+    float: left;
+}
+
+.ul-follow>li:hover {
+    transform: scale(1.02);
+    box-shadow: 5px 5px 10px 2px #7e7e7e;
+}
+
+.deleteFollow {
+    opacity: 0.1;
+    position: relative;
+    float: right;
+    width: 100px;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.589);
+    color: #ffffff;
+    font-size: 20px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.deleteFollow:hover {
+    opacity: 1;
+}
+
+
+/*账户安全*/
+#info6>p {
+    width: 400px;
+    margin: 50px 50px;
+    font-size: 20px;
+    color: #3a3a3a;
+    letter-spacing: 2px;
+}
+
+
+
+#info6>p>input {
+    width: auto;
+    height: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    border: 1px solid #2894af;
+    border-radius: 5px;
+}
+
+#info6>p>input:focus {
+
+    border: 1px solid #8616ee;
+    transform: scale(1.02);
+
+}
+
+#info6>button {
+    position: absolute;
+    left: 10%;
+    margin: 50px;
+    width: 100px;
+    height: 40px;
+    outline: none;
+    border: 0px solid #ffffff;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: #3ac1c7;
+    color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 20px -3px #888;
+    cursor: pointer;
+}
+
+#info6>button:hover {
+    background-color: yellowgreen;
+
+}

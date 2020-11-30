@@ -1,0 +1,71 @@
+#container {
+    margin: 10px 40px 0 0;
+    position: relative;
+    width: 780px;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  #list {
+    position: absolute;
+    z-index: 1;
+    width: 5460px;
+  }
+  #list img {
+    float: left;
+    width: 780px;
+    height: 350px;
+  }
+  #buttons {
+    height: 10px;
+    width: 200px;
+    position: absolute;
+    right: 20px;/*设置水平垂直居中*/
+    margin: 0 auto;/*设置水平垂直居中*/
+    bottom: 20px;
+    z-index: 2;
+  }
+  #buttons span {
+    float: left;
+    margin-right: 25px;
+    width: 10px;
+    height: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5%;
+    background: #00a7da;
+    cursor: pointer;
+  }
+  #buttons .on {
+    background: orangered;
+  }
+  .arrow {
+    width: 40px;
+    height: 40px;
+    display: none;
+    position: absolute;
+    top: 0; /*设置水平垂直居中*/
+    bottom: 0; /*设置水平垂直居中*/
+    margin: auto 0; /*设置水平垂直居中*/
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 39px;
+    text-align: center;
+    color: #fff;
+    background-color: RGBA(0, 0, 0, .3);
+    cursor: pointer;
+    z-index: 2;
+  }
+  .arrow:hover{
+    background-color: RGBA(0, 0, 0, .7);
+  }
+  #container:hover .arrow {
+    display: block;
+  }
+  #prev{
+    left: 10px;
+    text-decoration: none;
+  }
+  #next{
+    right: 10px;
+    text-decoration: none;
+  }
